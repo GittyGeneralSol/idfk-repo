@@ -44,7 +44,7 @@ part_properties = {
 "num_points": 6,
 "radius": 280
 },
-"parent_part": &"Hexhuge",
+"parent_part": null,
 "part_position": {
 "x": 0.0,
 "y": 0.0
@@ -157,7 +157,7 @@ part_properties = {
 "width": 13.0
 }
 },
-"parent_part": null,
+"parent_part": &"body",
 "part_position": {
 "x": 0.0,
 "y": 0.0

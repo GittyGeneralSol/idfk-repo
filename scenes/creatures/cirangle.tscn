@@ -25,7 +25,7 @@ part_properties = {
 "body_type": "CIRCLE",
 "radius": 85
 },
-"parent_part": &"Cirangle",
+"parent_part": null,
 "part_position": {
 "x": 0.0,
 "y": 0.0

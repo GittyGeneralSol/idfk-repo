@@ -4,7 +4,7 @@ extends PocketDimension
 
 @onready var world_name: String = "world_4"
 @onready var default_speed_factor := 1.0
-@onready var boundary_block: String = "wall"
+@onready var boundary_block: String = ""
 @onready var anchor_pos_override: Vector2i = Vector2i.ZERO
 
 ## References to other worlds
@@ -12,12 +12,18 @@ extends PocketDimension
 @onready var world_refs: PackedStringArray = ["solarium"]
 
 func _ready() -> void:
+    set_params()
+    
     anchor_pos = anchor_pos_override
     add_to_group("worlds")
     background._setup_bg()
     initialize_astar_grid()
     create_boundary()
     create_blocks()
+    
+func set_params():
+    world_size = Vector2(6, 8)
+    bg_color = Color("a15f66")
 
 func create_boundary():
     
@@ -47,4 +53,4 @@ func create_boundary():
         create_block(Vector2(-grid_pos_x, grid_pos_y), boundary_block) # Left
 
 func create_blocks():
-    create_block(Vector2(2, 2), "pocket_dim_box", ["target_world_name", world_refs[0]])
+    create_block(Vector2(2, 2), "pocket_dim_box", { "target_world_name": world_refs[0]} )

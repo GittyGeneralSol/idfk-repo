@@ -23,7 +23,7 @@ part_properties = {
 "height": 50.0,
 "width": 25.0
 },
-"parent_part": &"Sparkly",
+"parent_part": null,
 "part_position": {
 "x": 0.0,
 "y": 0.0
@@ -113,7 +113,7 @@ part_properties = {
 "height": 25.0,
 "width": 12.5
 },
-"parent_part": &"Sparkly",
+"parent_part": null,
 "part_position": {
 "x": 0.0,
 "y": 0.0

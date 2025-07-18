@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://jfaelq0ncbdn"]
+
+[ext_resource type="Script" uid="uid://4udeytxju0vw" path="res://scripts/creatures/player/player.gd" id="1_xi3l8"]
+[ext_resource type="Script" uid="uid://daygm85xqqe1e" path="res://scripts/creatures/player/body.gd" id="2_t2d26"]
+[ext_resource type="Script" uid="uid://bh0udt4ynr6eq" path="res://scripts/creatures/player/eyes.gd" id="3_vasa4"]
+[ext_resource type="Script" uid="uid://4in8miew4fy6" path="res://scripts/creatures/player/collision_shape_2d.gd" id="4_gst85"]
+[ext_resource type="PackedScene" uid="uid://b8oxhvgyp5xqo" path="res://scenes/utility/sfx_player.tscn" id="5_faadt"]
+
+[sub_resource type="GDScript" id="GDScript_bmo3f"]
+script/source = "@tool
+
+extends eyelids
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    ## Changeable Values:
+    eye_shape = \"square\" # Options: \"circle\", \"square\"
+    eye_size = Vector2(53, 53) # Size if eye_shape is \"square\" (width, height)
+    eyelid_color_top = Color.GRAY
+    eyelid_color_bottom = Color.GRAY
+    openness = 1.0
+    eye_center = Vector2(-50, 0)
+"
+
+[sub_resource type="GDScript" id="GDScript_q8mta"]
+script/source = "@tool
+
+extends eyelids
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    ## Changeable Values:
+    eye_shape = \"square\" # Options: \"circle\", \"square\"
+    eye_size = Vector2(53, 53) # Size if eye_shape is \"square\" (width, height)
+    eyelid_color_top = Color.GRAY
+    eyelid_color_bottom = Color.GRAY
+    openness = 1.0
+    eye_center = Vector2(50, 0)
+"
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_xi3l8"]
+points = PackedVector2Array(85, -85, 85, 85, -85, 85, -85, -85)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_xi3l8")
+
+[node name="body" type="Node2D" parent="."]
+script = ExtResource("2_t2d26")
+
+[node name="eyes" type="Node2D" parent="."]
+script = ExtResource("3_vasa4")
+eyes_displacement = Vector2(-25, -25)
+
+[node name="eyelids_left" type="Node2D" parent="eyes"]
+script = SubResource("GDScript_bmo3f")
+eye_shape = "square"
+eye_size = Vector2(53, 53)
+eye_center = Vector2(-50, 0)
+eyelid_color_top = Color(0.745098, 0.745098, 0.745098, 1)
+eyelid_color_bottom = Color(0.745098, 0.745098, 0.745098, 1)
+
+[node name="eyelids_right" type="Node2D" parent="eyes"]
+script = SubResource("GDScript_q8mta")
+eye_shape = "square"
+eye_size = Vector2(53, 53)
+eye_center = Vector2(50, 0)
+eyelid_color_top = Color(0.745098, 0.745098, 0.745098, 1)
+eyelid_color_bottom = Color(0.745098, 0.745098, 0.745098, 1)
+
+[node name="Blink_trigger" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="move_cooldown" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("ConvexPolygonShape2D_xi3l8")
+script = ExtResource("4_gst85")
+
+[node name="sfx_player" parent="." instance=ExtResource("5_faadt")]
+
+[connection signal="timeout" from="Blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="move_cooldown" to="." method="_on_move_cooldown_timeout"]

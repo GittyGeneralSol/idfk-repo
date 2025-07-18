@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp86xs1qmvc8"]
+
+[ext_resource type="PackedScene" uid="uid://db2p40x20ktkv" path="res://scenes/blocks/base_block.tscn" id="1_35ph6"]
+[ext_resource type="Script" uid="uid://c0qwbvgipjja6" path="res://scripts/blocks/freeze_pod/body.gd" id="2_jhw7q"]
+[ext_resource type="Script" uid="uid://c44j77vpn7vwl" path="res://scripts/blocks/freeze_pod/freeze_pod.gd" id="2_uwuvd"]
+[ext_resource type="Script" uid="uid://co4fcemvv4spj" path="res://scripts/blocks/freeze_pod/outline.gd" id="3_uwuvd"]
+[ext_resource type="Script" uid="uid://deswoef5duomh" path="res://scripts/blocks/freeze_pod/glass.gd" id="4_i4j13"]
+
+[node name="freezepod" instance=ExtResource("1_35ph6")]
+script = ExtResource("2_uwuvd")
+frozen_obj_path = ""
+block_type = "freeze_pod"
+special_data_title = "freeze_pod_data"
+stored_data = {
+"frozen_obj_path": ""
+}
+
+[node name="body" parent="." index="0"]
+clip_children = 0
+script = ExtResource("2_jhw7q")
+
+[node name="glass" type="Node2D" parent="." index="1"]
+script = ExtResource("4_i4j13")
+
+[node name="outline" parent="." index="2"]
+script = ExtResource("3_uwuvd")
+
+[node name="ObjectContainer" type="Node2D" parent="." index="3"]

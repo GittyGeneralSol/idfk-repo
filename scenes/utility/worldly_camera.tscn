@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvpd1lm8kb71c"]
+
+[ext_resource type="Script" uid="uid://prb12vmx2sk7" path="res://scripts/utility/worldly_camera.gd" id="1_2muhn"]
+
+[node name="WorldlyCamera" type="Camera2D"]
+script = ExtResource("1_2muhn")

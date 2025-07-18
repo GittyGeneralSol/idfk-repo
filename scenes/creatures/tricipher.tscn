@@ -1,0 +1,275 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbs576j0gt3w5"]
+
+[ext_resource type="Script" uid="uid://bxlh5pmq1gb6y" path="res://scripts/creatures/tricipher/tricipher.gd" id="1_6eh5a"]
+[ext_resource type="Script" uid="uid://b14ry0ulwobxe" path="res://scripts/creatures/tricipher/body.gd" id="2_mangs"]
+[ext_resource type="Script" uid="uid://cy4sjsivtxo6v" path="res://scripts/creatures/tricipher/decoration.gd" id="3_ntjul"]
+[ext_resource type="Script" uid="uid://bim2kyqvfppp7" path="res://scripts/creatures/tricipher/eye.gd" id="4_ujcky"]
+[ext_resource type="Script" uid="uid://bqwtm8v86n85t" path="res://scripts/creatures/tricipher/accessories.gd" id="4_xxa08"]
+[ext_resource type="Script" uid="uid://c6yps6vyce81h" path="res://scripts/creatures/tricipher/lashes.gd" id="5_ntjul"]
+[ext_resource type="Script" uid="uid://b14lcurn3ryc4" path="res://scripts/creatures/tricipher/eye_system.gd" id="5_xxa08"]
+
+[node name="Tricipher" type="Node2D"]
+script = ExtResource("1_6eh5a")
+
+[node name="body" type="Node2D" parent="."]
+scale = Vector2(1.00088, 1.00088)
+script = ExtResource("2_mangs")
+pulsing = true
+part_properties = {
+"body_properties": {
+"body_color": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 1.0
+},
+"body_type": "POLYGON",
+"clip_child_parts": false,
+"num_points": 3,
+"radius": 85,
+"shape_rotation": -90
+},
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": true,
+"spinning": false
+}
+
+[node name="decoration" type="Node2D" parent="body"]
+script = ExtResource("3_ntjul")
+base_positions = PackedVector2Array(-3.71547e-06, -85, 73.6122, 42.5, -73.6122, 42.5)
+part_type = 1
+part_properties = {
+"deco_properties": {
+"shape_0": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.843137,
+"r": 1.0
+},
+"num_points": 3,
+"position": {
+"x": -3.71547e-06,
+"y": -65.0
+},
+"radius": 20.0,
+"rotation": 150.0,
+"shape_type": "POLYGON"
+},
+"shape_1": {
+"color": {
+"a": 1.0,
+"b": 0.313726,
+"g": 0.498039,
+"r": 1.0
+},
+"num_points": 3,
+"position": {
+"x": 56.2916,
+"y": 32.5
+},
+"radius": 20.0,
+"rotation": 150.0,
+"shape_type": "POLYGON"
+},
+"shape_2": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.647059,
+"r": 1.0
+},
+"num_points": 3,
+"position": {
+"x": -56.2916,
+"y": 32.5
+},
+"radius": 20.0,
+"rotation": 150.0,
+"shape_type": "POLYGON"
+}
+},
+"parent_part": &"body",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "DECO",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="hat" type="Node2D" parent="body"]
+script = ExtResource("4_xxa08")
+part_type = 1
+part_properties = {
+"deco_properties": {
+"shape_0": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 0.0
+},
+"position": {
+"x": 0.0,
+"y": -115.0
+},
+"scale": {
+"x": 1.5,
+"y": 1.5
+},
+"shape_type": "MIX",
+"stack": [{
+"position": Vector2(0, -20),
+"shape_type": 1,
+"size": Vector2(15, 40)
+}, {
+"position": Vector2(0, 0),
+"rotation": -90,
+"shape_type": 1,
+"size": Vector2(7, 30)
+}]
+}
+},
+"parent_part": &"body",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "DECO",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eye_system" type="Node2D" parent="."]
+scale = Vector2(1.00088, 1.00088)
+script = ExtResource("5_xxa08")
+part_type = 4
+pulsing = true
+part_properties = {
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE_CONTAINER",
+"pulsing": true,
+"spinning": false
+}
+
+[node name="accessories" type="Node2D" parent="eye_system"]
+script = ExtResource("5_ntjul")
+part_type = 1
+part_properties = {
+"deco_properties": {
+"shape_0": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 0.0
+},
+"length": 50,
+"notch_width": 5,
+"position": {
+"x": 0.0,
+"y": 33.0
+},
+"rotation": 90,
+"scale": {
+"x": 0.45,
+"y": 0.45
+},
+"shape_type": "HOURGLASS",
+"width": 35
+},
+"shape_1": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 0.0
+},
+"position": {
+"x": 20.0,
+"y": 50.0
+},
+"rotation": 35,
+"shape_type": "SYMBOL",
+"symbol": "cane"
+}
+},
+"parent_part": &"eye_system",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "DECO",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eye" type="Node2D" parent="eye_system"]
+clip_children = 2
+script = ExtResource("4_ujcky")
+part_type = 2
+part_properties = {
+"eye_properties": {
+"blink_type": "OPENNESS",
+"draw_outline": false,
+"eye_color": {
+"a": 1.0,
+"b": 1.0,
+"g": 1.0,
+"r": 1.0
+},
+"eye_type": "CIRCLE",
+"eyelid_props": {
+"eyelid_color_bottom": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 1.0
+},
+"eyelid_color_top": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 1.0
+},
+"lid_type": "TWOLID"
+},
+"radius": 25
+},
+"parent_part": &"eye_system",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="blink_trigger" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="initial_move_trigger" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

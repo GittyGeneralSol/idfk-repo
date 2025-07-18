@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cirbnxvxgfyqg"]
+
+[ext_resource type="Script" uid="uid://vj54my3xcvq3" path="res://scripts/turrets/shield/body.gd" id="1_bpd6n"]
+[ext_resource type="Script" uid="uid://c4cnsye3kp5av" path="res://scripts/turrets/shield/shield.gd" id="1_ciwkm"]
+[ext_resource type="Script" uid="uid://bmc48y5cchwdr" path="res://scripts/turrets/shield/inner.gd" id="2_ynaib"]
+[ext_resource type="Script" uid="uid://cy7jhifducsf0" path="res://scripts/turrets/shield/inner_double.gd" id="3_ynaib"]
+[ext_resource type="Script" uid="uid://srr8888qc254" path="res://scripts/turrets/shield/core.gd" id="5_5rel8"]
+[ext_resource type="Script" uid="uid://hoaujbknxfjg" path="res://scripts/turrets/shield/energy_pulse.gd" id="5_u33in"]
+
+[node name="Shield" type="Node2D"]
+rotation = 2.75759
+script = ExtResource("1_ciwkm")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("1_bpd6n")
+
+[node name="inner" type="Node2D" parent="body"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("2_ynaib")
+
+[node name="inner_double" type="Node2D" parent="body"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("3_ynaib")
+
+[node name="core" type="Node2D" parent="body"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("5_5rel8")
+
+[node name="energy_pulse" type="Node2D" parent="body"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("5_u33in")

@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://br6hbugpy2gyt"]
+
+[ext_resource type="PackedScene" uid="uid://7i2on6k3mgft" path="res://scenes/Creatures/cirangle.tscn" id="1_7ktqw"]
+[ext_resource type="Script" uid="uid://cq860tuhupi8a" path="res://scripts/world.gd" id="1_hmtct"]
+[ext_resource type="Texture2D" uid="uid://dvh26ysxefg7p" path="res://assets/Creatures/Bodies/Round.png" id="2_v21lv"]
+[ext_resource type="Script" uid="uid://dcwsot133a8uj" path="res://scripts/camera_handler.gd" id="2_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://bbgedyjpsh1g" path="res://scenes/Creatures/squsqu.tscn" id="4_qolgi"]
+[ext_resource type="PackedScene" uid="uid://b4yrg3cyaqsef" path="res://scenes/Creatures/tricirc.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://buykg26b8ysjy" path="res://scenes/Objects/starpouch.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://bgbe7m8lnvx8c" path="res://scenes/Creatures/deltsqu.tscn" id="8_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://jfaelq0ncbdn" path="res://scenes/Creatures/player.tscn" id="13_jhx03"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_hmtct")
+
+[node name="CameraHandler" type="Node" parent="."]
+script = ExtResource("2_w7kh3")
+metadata/_custom_type_script = "uid://dcwsot133a8uj"
+
+[node name="Cirsquick" parent="." instance=ExtResource("1_7ktqw")]
+position = Vector2(-195, -55)
+dead = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_left = 1.0
+offset_top = 22.0
+offset_right = 257.0
+offset_bottom = 278.0
+texture = ExtResource("2_v21lv")
+
+[node name="Squsquck" parent="." instance=ExtResource("4_qolgi")]
+position = Vector2(1179, 626)
+dead = null
+move_step = null
+displ_when_eye_targets = null
+
+[node name="Starpouch" parent="." instance=ExtResource("6_qfnet")]
+position = Vector2(1009, 198)
+
+[node name="Deltsqu" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(0, 530)
+
+[node name="Tricirc" parent="." instance=ExtResource("5_71j4m")]
+position = Vector2(-200, 530)
+dead = true
+
+[node name="Player" parent="." instance=ExtResource("13_jhx03")]
+position = Vector2(400, 1200)
+speed_factor = null
+move_cooldown_duration = null
+dead = null
+move_step = null
+displ_when_eye_targets = null

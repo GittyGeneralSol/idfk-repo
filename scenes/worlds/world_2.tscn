@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5fx5a8kw5nla"]
+
+[ext_resource type="Script" uid="uid://ci0jx5t686uqg" path="res://scripts/worlds/world_2.gd" id="1_41gub"]
+[ext_resource type="Script" uid="uid://dcwsot133a8uj" path="res://scripts/utility/camera_handler.gd" id="3_7u043"]
+[ext_resource type="Script" uid="uid://bf4d61imfj70g" path="res://scripts/worlds/backgrounds/bg1.gd" id="4_0kt5u"]
+[ext_resource type="PackedScene" uid="uid://bbgedyjpsh1g" path="res://scenes/creatures/squsqu.tscn" id="6_2krbc"]
+[ext_resource type="PackedScene" uid="uid://buykg26b8ysjy" path="res://scenes/objects/starpouch.tscn" id="7_hkjhj"]
+[ext_resource type="PackedScene" uid="uid://b4yrg3cyaqsef" path="res://scenes/creatures/tricirc.tscn" id="9_ghnoc"]
+[ext_resource type="PackedScene" uid="uid://cqfrdg4p5g73r" path="res://scenes/effects/colored_rects.tscn" id="11_7u043"]
+[ext_resource type="PackedScene" uid="uid://cpgbl0g1vjt88" path="res://scenes/creatures/pentcirc.tscn" id="11_hkjhj"]
+[ext_resource type="PackedScene" uid="uid://cw6mxbx44k6mj" path="res://scenes/creatures/tristar.tscn" id="12_efige"]
+
+[node name="World 2" type="Node2D"]
+script = ExtResource("1_41gub")
+world_size = Vector2(10, 10)
+bg_color = Color(0.215686, 0.152941, 0.603922, 1)
+
+[node name="CameraHandler" type="Node" parent="."]
+script = ExtResource("3_7u043")
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("4_0kt5u")
+z_ind = -10000
+
+[node name="Squsquck" parent="." instance=ExtResource("6_2krbc")]
+position = Vector2(-800, -800)
+
+[node name="Starpouch" parent="." instance=ExtResource("7_hkjhj")]
+position = Vector2(921, 334)
+
+[node name="Tricirc" parent="." instance=ExtResource("9_ghnoc")]
+position = Vector2(-7, 624)
+
+[node name="Pentcirc" parent="." instance=ExtResource("11_hkjhj")]
+position = Vector2(-600, 800)
+
+[node name="Tristar" parent="." instance=ExtResource("12_efige")]
+position = Vector2(-600, 600)
+
+[node name="ColoredRects" parent="." instance=ExtResource("11_7u043")]
+position = Vector2(-811, -16)
+max_size_variation = Vector2(10, 10)

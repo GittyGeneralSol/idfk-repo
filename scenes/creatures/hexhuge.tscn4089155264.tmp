@@ -1,0 +1,147 @@
+[gd_scene load_steps=6 format=3 uid="uid://68dl6gluos8h"]
+
+[ext_resource type="Script" uid="uid://d0mchce4jo2kp" path="res://scripts/creatures/hepthuge/hepthuge.gd" id="1_ajml5"]
+[ext_resource type="Script" uid="uid://cnb5hsh7b1d07" path="res://scripts/creatures/hepthuge/body.gd" id="2_tsog0"]
+[ext_resource type="Script" uid="uid://d138vkpwu5nc4" path="res://scripts/creatures/hepthuge/decoration.gd" id="3_ogu6s"]
+[ext_resource type="Script" uid="uid://bmxcccodqdpj4" path="res://scripts/creatures/base_creature_eye.gd" id="5_sequ4"]
+[ext_resource type="PackedScene" uid="uid://b8oxhvgyp5xqo" path="res://scenes/utility/worldly_sfx_player.tscn" id="11_l8jv2"]
+
+[node name="Hexhuge" type="Node2D"]
+script = ExtResource("1_ajml5")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("2_tsog0")
+outline_correction = -3.0001
+shape_color = Color(1, 0.647059, 0, 1)
+rotation_deg = 0.0
+body_properties = {
+"body_type": "POLYGON",
+"displacement": {
+"x": 0.0,
+"y": 0.0
+},
+"outline_correction": -3.0001,
+"outline_width": 10.0,
+"polygon_circumrad": 250.0,
+"polygon_num_points": 3,
+"polygon_snap_closest": true,
+"rotation_deg": 0.0,
+"shape_color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.647059,
+"r": 1.0
+},
+"use_polyline": true
+}
+polygon_circumrad = 250.0
+circ_circumrad = 250.0
+reuleaux_circumrad = 150.0
+part_properties = {
+"body_properties": {
+"body_type": "POLYGON",
+"displacement": {
+"x": 0.0,
+"y": 0.0
+},
+"outline_correction": -3.0001,
+"outline_width": 10.0,
+"polygon_circumrad": 250.0,
+"polygon_num_points": 3,
+"polygon_snap_closest": true,
+"rotation_deg": 0.0,
+"shape_color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.647059,
+"r": 1.0
+},
+"use_polyline": true
+},
+"parent_part": null,
+"part_type": "MAIN_BODY"
+}
+
+[node name="decoration" type="Node2D" parent="body"]
+script = ExtResource("3_ogu6s")
+
+[node name="blink_trigger" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="initial_move_trigger" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="sfx_player" parent="." instance=ExtResource("11_l8jv2")]
+
+[node name="BaseCreatureEye" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("5_sequ4")
+eye_color = Color(1, 1, 1, 1)
+eye_properties = {
+"displacement": {
+"x": 0.0,
+"y": 0.0
+},
+"eye_color": {
+"a": 1.0,
+"b": 1.0,
+"g": 1.0,
+"r": 1.0
+},
+"eye_type": "CIRCLE",
+"eyelid_color_bottom": {
+"a": 1.0,
+"b": 0.921569,
+"g": 0.807843,
+"r": 0.529412
+},
+"eyelid_color_top": {
+"a": 1.0,
+"b": 0.921569,
+"g": 0.807843,
+"r": 0.529412
+},
+"hold_closed_time": 0.1,
+"rotation_deg": -90.0,
+"time_to_blink": 0.2
+}
+eye_radius = 70.0
+part_properties = {
+"eye_properties": {
+"displacement": {
+"x": 0.0,
+"y": 0.0
+},
+"eye_color": {
+"a": 1.0,
+"b": 1.0,
+"g": 1.0,
+"r": 1.0
+},
+"eye_type": "CIRCLE",
+"eyelid_color_bottom": {
+"a": 1.0,
+"b": 0.921569,
+"g": 0.807843,
+"r": 0.529412
+},
+"eyelid_color_top": {
+"a": 1.0,
+"b": 0.921569,
+"g": 0.807843,
+"r": 0.529412
+},
+"hold_closed_time": 0.1,
+"rotation_deg": -90.0,
+"time_to_blink": 0.2
+},
+"parent_part": null,
+"part_type": "MAIN_BODY"
+}
+metadata/_custom_type_script = "uid://bmxcccodqdpj4"
+
+[connection signal="timeout" from="blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

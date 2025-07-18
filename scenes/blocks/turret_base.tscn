@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://12j31ilupdr8"]
+
+[ext_resource type="PackedScene" uid="uid://db2p40x20ktkv" path="res://scenes/blocks/base_block.tscn" id="1_gkkk3"]
+[ext_resource type="Script" uid="uid://bteowax7ydtro" path="res://scripts/blocks/turret_base/turret_base.gd" id="2_mfokr"]
+[ext_resource type="Script" uid="uid://dyenolx030ruf" path="res://scripts/blocks/turret_base/body.gd" id="3_mfokr"]
+[ext_resource type="Script" uid="uid://gtpa17t3ysfx" path="res://scripts/blocks/turret_base/layers.gd" id="4_mfokr"]
+[ext_resource type="Script" uid="uid://cu5g2dormdfd2" path="res://scripts/blocks/turret_base/buttons.gd" id="6_mx60a"]
+[ext_resource type="Script" uid="uid://bcdhd0s0484xa" path="res://scripts/blocks/pocket_dim_box/outline.gd" id="9_263me"]
+
+[node name="TurretBase" instance=ExtResource("1_gkkk3")]
+script = ExtResource("2_mfokr")
+turret_name = ""
+block_type = "turret_base"
+stored_data = {
+"turret_name": ""
+}
+
+[node name="body" parent="." index="0"]
+clip_children = 0
+script = ExtResource("3_mfokr")
+
+[node name="layers" type="Node2D" parent="." index="1"]
+script = ExtResource("4_mfokr")
+
+[node name="outline" parent="." index="2"]
+script = ExtResource("9_263me")
+
+[node name="buttons" type="Node2D" parent="." index="3"]
+script = ExtResource("6_mx60a")
+button_colors = PackedColorArray(0.498039, 1, 0, 1, 1, 1, 0, 1)
+action_strings = PackedStringArray("toggle_turret", "upgrade_turret")

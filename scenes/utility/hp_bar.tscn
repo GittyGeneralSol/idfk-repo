@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxkjkgirduokw"]
+
+[ext_resource type="Script" uid="uid://dbmv4lcg6a2ik" path="res://scripts/utility/bars/hp_bar.gd" id="1_oa640"]
+
+[node name="Hp Bar" type="Node2D"]
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("1_oa640")

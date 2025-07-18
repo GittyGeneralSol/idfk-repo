@@ -1,0 +1,102 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk64sdg0w6wuy"]
+
+[ext_resource type="Script" uid="uid://b5vq6npef15uy" path="res://scripts/creatures/eyesqu/eyesqu.gd" id="1_c523s"]
+[ext_resource type="Script" uid="uid://krgnutn4rhl8" path="res://scripts/creatures/eyesqu/body.gd" id="2_3kp7g"]
+[ext_resource type="Script" uid="uid://br8t08btylmev" path="res://scripts/creatures/eyesqu/left_eye.gd" id="4_xsnmt"]
+
+[node name="Eyesqu" type="Node2D"]
+script = ExtResource("1_c523s")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("2_3kp7g")
+part_properties = {
+"body_properties": {
+"body_color": {
+"a": 1.0,
+"b": 1.0,
+"g": 0.564706,
+"r": 0.117647
+},
+"body_type": "RECTANGLE",
+"clip_child_parts": true,
+"size": {
+"x": 170.0,
+"y": 170.0
+}
+},
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eye" type="Node2D" parent="body"]
+clip_children = 2
+script = ExtResource("4_xsnmt")
+draw_outline = true
+part_type = 2
+part_properties = {
+"eye_properties": {
+"blink_type": "OPENNESS",
+"draw_outline": true,
+"eye_color": {
+"a": 1.0,
+"b": 1.0,
+"g": 1.0,
+"r": 1.0
+},
+"eye_type": "RECTANGLE",
+"eyelid_props": {
+"eyelid_color_bottom": {
+"a": 1.0,
+"b": 0.9,
+"g": 0.508235,
+"r": 0.105882
+},
+"eyelid_color_top": {
+"a": 1.0,
+"b": 0.9,
+"g": 0.508235,
+"r": 0.105882
+},
+"lid_type": "TWOLID"
+},
+"outline_color": {
+"a": 1.0,
+"b": 0.95,
+"g": 0.536471,
+"r": 0.111765
+},
+"size": {
+"x": 140.0,
+"y": 140.0
+}
+},
+"parent_part": &"body",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="Blink_trigger" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="Initial_move_trigger" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="Initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

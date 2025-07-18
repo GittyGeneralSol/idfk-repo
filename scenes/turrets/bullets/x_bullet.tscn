@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://x4y5lhpk4uv3"]
+
+[ext_resource type="Script" uid="uid://bu5ad8vkcjnt0" path="res://scripts/turrets/bullets/x_bullet.gd" id="1_aptg5"]
+
+[node name="X-Bullet" type="Node2D"]
+script = ExtResource("1_aptg5")

@@ -1,0 +1,168 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbgedyjpsh1g"]
+
+[ext_resource type="Script" uid="uid://dvcwu3pqab47t" path="res://scripts/creatures/squsqu/squsqu.gd" id="1_ffmmp"]
+[ext_resource type="Script" uid="uid://dik0u07royyrp" path="res://scripts/creatures/squsqu/body.gd" id="1_xhv6s"]
+[ext_resource type="Script" uid="uid://bh0udt4ynr6eq" path="res://scripts/creatures/player/eyes.gd" id="3_a77t3"]
+[ext_resource type="Script" uid="uid://b3ejqnapies46" path="res://scripts/creatures/squsqu/left_eye.gd" id="4_inbhv"]
+[ext_resource type="Script" uid="uid://dff6ge5glmwrd" path="res://scripts/creatures/squsqu/right_eye.gd" id="5_a77t3"]
+
+[node name="Squsqu" type="Node2D"]
+script = ExtResource("1_ffmmp")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("1_xhv6s")
+part_properties = {
+"body_properties": {
+"body_color": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 0.498039
+},
+"body_type": "RECTANGLE",
+"size": {
+"x": 170.0,
+"y": 170.0
+}
+},
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eyes_container" type="Node2D" parent="."]
+script = ExtResource("3_a77t3")
+part_type = 4
+part_properties = {
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE_CONTAINER",
+"pulsing": false,
+"spinning": false
+}
+metadata/_custom_type_script = "uid://hrh2ywct2ixi"
+
+[node name="left_eye" type="Node2D" parent="eyes_container"]
+clip_children = 2
+position = Vector2(-50, 0)
+script = ExtResource("4_inbhv")
+part_type = 2
+part_properties = {
+"eye_properties": {
+"blink_type": "OPENNESS",
+"draw_outline": false,
+"eye_color": {
+"a": 1.0,
+"b": 1.0,
+"g": 1.0,
+"r": 1.0
+},
+"eye_type": "MIX",
+"eyelid_props": {
+"eyelid_color_bottom": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 0.498039
+},
+"eyelid_color_top": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 0.498039
+},
+"lid_type": "TWOLID"
+},
+"shape_rotation": 45,
+"stack": [{
+"radius": 25,
+"shape_type": 0
+}, {
+"eye_color": Color(1, 1, 1, 1),
+"height": 45.0,
+"notch_width": 22.5,
+"position": Vector2(0, -30),
+"shape_type": 7,
+"width": 45.0
+}]
+},
+"parent_part": &"eyes_container",
+"part_position": {
+"x": -50.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="right_eye" type="Node2D" parent="eyes_container"]
+clip_children = 2
+position = Vector2(50, 0)
+script = ExtResource("5_a77t3")
+part_type = 2
+part_properties = {
+"eye_properties": {
+"blink_type": "OPENNESS",
+"draw_outline": false,
+"eye_color": {
+"a": 1.0,
+"b": 1.0,
+"g": 1.0,
+"r": 1.0
+},
+"eye_size": {
+"x": 50.0,
+"y": 50.0
+},
+"eye_type": "RECTANGLE",
+"eyelid_props": {
+"eyelid_color_bottom": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 0.498039
+},
+"eyelid_color_top": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 0.498039
+},
+"lid_type": "TWOLID"
+}
+},
+"parent_part": &"eyes_container",
+"part_position": {
+"x": 50.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="Blink_trigger" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="Initial_move_trigger" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="Initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://digssltnyckvk"]
+
+[sub_resource type="GDScript" id="GDScript_7kjjd"]
+resource_name = "bezier_curve_2"
+script/source = "@tool
+
+extends Node2D
+
+const PolygonGenerator = preload(\"res://scripts/autoloads/PolygonGenerator.gd\")
+
+func _ready() -> void:
+    queue_redraw()
+    
+func _draw() -> void:
+    var points = PolygonGenerator.generate_polygon_points(3, 20, Vector2.ZERO, -90, true)
+    var curve = Curve2D.new()
+    var in_handle: Vector2 = Vector2.ZERO
+    var out_handle: Vector2 = Vector2.ZERO
+    
+    for point in points:
+        curve.add_point(point, in_handle, out_handle)
+        
+    curve.sample_baked()
+    var points_line = curve.get_baked_points()
+    print(points_line)
+    draw_polyline(points_line, Color.WHITE, 5.0)
+"
+
+[node name="Bezier curve" type="Node2D"]
+script = SubResource("GDScript_7kjjd")

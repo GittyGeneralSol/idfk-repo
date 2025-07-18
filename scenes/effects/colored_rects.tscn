@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfrdg4p5g73r"]
+
+[ext_resource type="Script" uid="uid://cobxgb0lcpxns" path="res://scripts/effects/colored_squares.gd" id="1_daktx"]
+
+[node name="ColoredRects" type="Node2D"]
+script = ExtResource("1_daktx")
+number_of_rects = 8

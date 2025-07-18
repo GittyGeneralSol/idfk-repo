@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfy6kcm8hpd8e"]
+
+[ext_resource type="PackedScene" uid="uid://db2p40x20ktkv" path="res://scenes/blocks/base_block.tscn" id="1_g6g4u"]
+[ext_resource type="Script" uid="uid://ci0jx5t686uqg" path="res://scripts/worlds/world_2.gd" id="2_aruao"]
+[ext_resource type="Script" uid="uid://c0qwbvgipjja6" path="res://scripts/blocks/freeze_pod/body.gd" id="3_ki7ds"]
+[ext_resource type="Script" uid="uid://deswoef5duomh" path="res://scripts/blocks/freeze_pod/glass.gd" id="4_1tim1"]
+[ext_resource type="Script" uid="uid://co4fcemvv4spj" path="res://scripts/blocks/freeze_pod/outline.gd" id="5_x66hp"]
+[ext_resource type="Script" uid="uid://cgqjpv6hrlfp4" path="res://scripts/blocks/freeze_pod/collision_polygon_2d.gd" id="6_lx6f6"]
+[ext_resource type="PackedScene" uid="uid://b5fx5a8kw5nla" path="res://scenes/worlds/world_2.tscn" id="7_aruao"]
+
+[node name="freezepod" instance=ExtResource("1_g6g4u")]
+script = ExtResource("2_aruao")
+world_size = Vector2(20, 20)
+world_size_p = Vector2(4000, 4000)
+default_speed_factor = 1.0
+boundary_block = "wall"
+bg_size = Vector2(4200, 4200)
+current_tile_map = {}
+
+[node name="body" parent="." index="0"]
+clip_children = 0
+script = ExtResource("3_ki7ds")
+
+[node name="glass" type="Node2D" parent="." index="1"]
+script = ExtResource("4_1tim1")
+
+[node name="outline" parent="." index="2"]
+script = ExtResource("5_x66hp")
+
+[node name="CollisionPolygon2D" parent="." index="3"]
+polygon = PackedVector2Array(99.7021, -99.7021, 99.7021, 99.7021, -99.7021, 99.7021, -99.7021, -99.7021)
+script = ExtResource("6_lx6f6")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." index="4"]
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 1425.0
+offset_bottom = 1425.0
+scale = Vector2(0.1, 0.1)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" index="0"]
+handle_input_locally = false
+size = Vector2i(1500, 1500)
+render_target_update_mode = 4
+
+[node name="World 2" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("7_aruao")]

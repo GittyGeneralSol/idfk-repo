@@ -1,0 +1,73 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="IDFK"
+run/main_scene="uid://1efxbt1v6nhw"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(0.109804, 0.105882, 0.105882, 1)
+boot_splash/image="uid://bui5rdfev1j37"
+config/icon="uid://c7n8p6yo3vn15"
+
+[autoload]
+
+Constants="*res://scripts/autoloads/Constants.gd"
+Vars="*res://scripts/autoloads/Vars.gd"
+WorldUtils="*res://scripts/autoloads/WorldUtils.gd"
+SoundManager="*res://scripts/autoloads/SoundManager.gd"
+TransportManager="*res://scripts/autoloads/TransportManager.gd"
+SaveManager="*res://scripts/autoloads/SaveManager.gd"
+ShapeGens="*res://scripts/autoloads/ShapeGens.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/autoloads_plugin/plugin.cfg")
+
+[input]
+
+move_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+move_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":65,"location":0,"echo":false,"script":null)
+]
+}
+move_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+move_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":68,"location":0,"echo":false,"script":null)
+]
+}
+
+[input_devices]
+
+pointing/android/enable_pan_and_scale_gestures=true
+
+[layer_names]
+
+2d_render/layer_2="PDBs"
+
+[physics]
+
+2d/default_gravity_vector=Vector2(0, 0)
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=1

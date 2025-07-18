@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://4d38pix44q4m"]
+
+[ext_resource type="PackedScene" uid="uid://db2p40x20ktkv" path="res://scenes/blocks/base_block.tscn" id="1_dgtq8"]
+[ext_resource type="Script" uid="uid://c4gru5srds3ty" path="res://scripts/blocks/metal_block/body.gd" id="2_qfohj"]
+[ext_resource type="Script" uid="uid://dpckkgsvvwe01" path="res://scripts/blocks/metal_block/deco.gd" id="3_jikwl"]
+[ext_resource type="Script" uid="uid://c16dss5qs4sqy" path="res://scripts/blocks/metal_block/outline.gd" id="4_hrv6q"]
+
+[node name="metalblock" instance=ExtResource("1_dgtq8")]
+
+[node name="body" parent="." index="0"]
+script = ExtResource("2_qfohj")
+
+[node name="deco" parent="body" index="0"]
+script = ExtResource("3_jikwl")
+
+[node name="outline" parent="." index="1"]
+script = ExtResource("4_hrv6q")

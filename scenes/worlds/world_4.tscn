@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://n0fefv3pdhbs"]
+
+[ext_resource type="Script" uid="uid://t6heom4ejhv6" path="res://scripts/worlds/world_4.gd" id="1_e87am"]
+[ext_resource type="Script" uid="uid://dcwsot133a8uj" path="res://scripts/utility/camera_handler.gd" id="2_elnep"]
+[ext_resource type="Script" uid="uid://bf4d61imfj70g" path="res://scripts/worlds/backgrounds/bg1.gd" id="3_dagud"]
+
+[node name="World 4" type="Node2D"]
+script = ExtResource("1_e87am")
+world_size = Vector2(6, 6)
+bg_color = Color(0.552941, 0.552941, 0.552941, 1)
+
+[node name="CameraHandler" type="Node" parent="."]
+script = ExtResource("2_elnep")
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("3_dagud")
+z_ind = -10000

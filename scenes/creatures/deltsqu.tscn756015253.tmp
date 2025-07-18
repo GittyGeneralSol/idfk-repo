@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgbe7m8lnvx8c"]
+
+[ext_resource type="Script" uid="uid://d2t0cfrhuy810" path="res://scripts/creatures/deltsqu/body.gd" id="1_3s7ic"]
+[ext_resource type="Script" uid="uid://dl2c2wwh6emna" path="res://scripts/creatures/deltsqu/deltsqu.gd" id="1_05d6m"]
+[ext_resource type="Script" uid="uid://cogma3qakpni1" path="res://scripts/creatures/deltsqu/eye.gd" id="2_a8y2d"]
+[ext_resource type="Script" uid="uid://cy5arqu2n2fth" path="res://scripts/creatures/deltsqu/decoration.gd" id="3_05d6m"]
+[ext_resource type="Script" uid="uid://dutbjuawp0xmm" path="res://scripts/creatures/deltsqu/lids.gd" id="5_430p1"]
+[ext_resource type="PackedScene" uid="uid://b8oxhvgyp5xqo" path="res://scenes/utility/worldly_sfx_player.tscn" id="6_430p1"]
+
+[node name="Deltsqu" type="Node2D"]
+z_index = -1
+script = ExtResource("1_05d6m")
+
+[node name="body" type="Node2D" parent="."]
+z_index = -1
+script = ExtResource("1_3s7ic")
+body_type = 1
+outline_correction = 0.0
+shape_color = Color(1, 0.0784314, 0.576471, 1)
+body_properties = {
+"body_type": "REULEAUX",
+"circumrad": 90.0,
+"displacement": {
+"x": 0.0,
+"y": 0.0
+},
+"num_lobes": 3,
+"outline_correction": 0.0,
+"outline_width": 10.0,
+"polyline": "NONE",
+"rotation_deg": -90.0,
+"shape_color": {
+"a": 1.0,
+"b": 0.576471,
+"g": 0.0784314,
+"r": 1.0
+}
+}
+part_properties = {
+"body_properties": {
+"body_type": "REULEAUX",
+"circumrad": 90.0,
+"displacement": {
+"x": 0.0,
+"y": 0.0
+},
+"num_lobes": 3,
+"outline_correction": 0.0,
+"outline_width": 10.0,
+"polyline": "NONE",
+"rotation_deg": -90.0,
+"shape_color": {
+"a": 1.0,
+"b": 0.576471,
+"g": 0.0784314,
+"r": 1.0
+}
+},
+"parent_part": null,
+"part_type": "MAIN_BODY"
+}
+
+[node name="eye" type="Node2D" parent="."]
+script = ExtResource("2_a8y2d")
+star_points = PackedVector2Array(3.06152e-15, -50, 12.9904, -7.5, 43.3013, 25, 9.18455e-16, 15, -43.3013, 25, -12.9904, -7.5)
+star_outer_rad = 50.0
+star_inner_rad = 15.0
+num_points = 3
+angle_deg = -90.0
+eye_color = Color(1, 1, 1, 1)
+
+[node name="decoration" type="Node2D" parent="eye"]
+z_index = -1
+scale = Vector2(2, 2)
+script = ExtResource("3_05d6m")
+star_points = PackedVector2Array(2.44921e-15, -40, 10.3923, -6, 34.641, 20, 7.34764e-16, 12, -34.641, 20, -10.3923, -6)
+
+[node name="lids" type="Node2D" parent="eye"]
+scale = Vector2(1.1, 1.1)
+script = ExtResource("5_430p1")
+eye_shape = "star_special"
+num_points = 3
+eyelid_outer_rad = 50.0
+eyelid_inner_rad = 15.0
+
+[node name="blink_trigger" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="initial_move_trigger" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="sfx_player" parent="." instance=ExtResource("6_430p1")]
+
+[connection signal="timeout" from="blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://djol0yllnue6i"]
+
+[ext_resource type="Script" uid="uid://p4cnllfuprod" path="res://scripts/utility/gui.gd" id="1_gtpsb"]
+[ext_resource type="Script" uid="uid://k1gpxntwgrlf" path="res://scripts/utility/mobile_tap_move.gd" id="2_dqbu1"]
+[ext_resource type="Script" uid="uid://ciefchhmo5l4r" path="res://scripts/utility/buttons/common_buttons.gd" id="3_5ceqb"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_gtpsb")
+
+[node name="MobileTapMove" type="Node" parent="."]
+script = ExtResource("2_dqbu1")
+
+[node name="CommonButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_5ceqb")
+creature_groups = PackedStringArray("deltsqus", "tristars", "players", "squsqus", "hexhuges")
+button_colors = PackedColorArray(0.498039, 1, 0, 1, 0.254902, 0.411765, 0.882353, 1, 0.466667, 0.533333, 0.6, 1, 0.466667, 0.533333, 0.6, 1)
+action_strings = PackedStringArray("button_one", "game_load", "default", "default")

@@ -1,0 +1,148 @@
+[gd_scene load_steps=14 format=3 uid="uid://4x0soyu13v2"]
+
+[ext_resource type="Script" uid="uid://dtawb5t8ag3rg" path="res://scripts/symbols/work.gd" id="1_dp5vp"]
+[ext_resource type="Script" uid="uid://b836vh1kf76xw" path="res://scripts/symbols/Line.gd" id="2_3i8my"]
+[ext_resource type="Script" uid="uid://dk2ji7vsl7tyj" path="res://scripts/custom_polygon/custom_shape_logic.gd" id="3_8rokj"]
+[ext_resource type="Script" uid="uid://c1pr14dn35orq" path="res://scripts/symbols/a.gd" id="4_ogk2a"]
+[ext_resource type="Script" uid="uid://dktox21sedrv1" path="res://scripts/symbols/spike.gd" id="5_kx6f4"]
+[ext_resource type="Script" uid="uid://dbea1oivfini2" path="res://scenes/symbols/jj.gd" id="6_qp5in"]
+[ext_resource type="Script" uid="uid://c33v4c4skv7t7" path="res://scripts/custom_polygon/multi_shape_logic.gd" id="7_c5fls"]
+
+[sub_resource type="Resource" id="Resource_c5fls"]
+script = ExtResource("3_8rokj")
+params = {
+"color": Color(0, 0, 0, 1),
+"scale": Vector2(1.5, 1.5),
+"shape_type": 12,
+"stack": [{
+"position": Vector2(0, -20),
+"shape_type": 1,
+"size": Vector2(7, 90)
+}, {
+"boolean_operation": 4,
+"position": Vector2(13.75, -60),
+"scale": Vector2(0.7, 1),
+"shape_type": 12,
+"stack": [{
+"angle": -180,
+"radius": 25,
+"shape_type": 0
+}, {
+"angle": -180,
+"radius": 15,
+"shape_type": 0
+}]
+}]
+}
+
+[sub_resource type="Resource" id="Resource_26nuy"]
+script = ExtResource("3_8rokj")
+params = {
+"angle": 0.0,
+"color": Color(0.745098, 0.745098, 0.745098, 1),
+"num_points": 32,
+"rotation": 0,
+"scale": Vector2(1, 1),
+"shape_type": 0,
+"slant": 0.0
+}
+
+[sub_resource type="Resource" id="Resource_76sb6"]
+script = ExtResource("3_8rokj")
+params = {
+"angle": 360.0,
+"color": Color(0.745098, 0.745098, 0.745098, 1),
+"num_points": 32,
+"rotation": 0,
+"scale": Vector2(1, 1),
+"shape_type": 0,
+"slant": 0.0
+}
+
+[sub_resource type="Resource" id="Resource_plxdi"]
+script = ExtResource("7_c5fls")
+params = {
+"boolean_operation": 4,
+"position": Vector2(0, -25),
+"rotation": 180,
+"scale": Vector2(1, 1),
+"shape_type": 12,
+"slant": 0.0,
+"stack": [{
+"angle": 180,
+"radius": 25.0,
+"shape_type": 0
+}, {
+"position": Vector2(0, 60),
+"radius": 50,
+"shape_type": 0
+}]
+}
+
+[sub_resource type="Resource" id="Resource_fcfji"]
+script = ExtResource("7_c5fls")
+params = {
+"angle": 360.0,
+"color": Color(0.745098, 0.745098, 0.745098, 1),
+"position": Vector2(0, 0),
+"rotation": 0,
+"scale": Vector2(1, 1),
+"shape_type": 1,
+"size": Vector2(50, 50),
+"slant": 0.0
+}
+
+[sub_resource type="Resource" id="Resource_rq5xv"]
+script = ExtResource("7_c5fls")
+params = {
+"angle": 180,
+"color": Color(0.745098, 0.745098, 0.745098, 1),
+"num_points": 32,
+"position": Vector2(0, 25),
+"radius": 25.0,
+"rotation": 0,
+"scale": Vector2(1, 1),
+"shape_type": 0,
+"slant": 0.0
+}
+
+[node name="Work" type="Polygon2D"]
+polygon = PackedVector2Array(25.7461, -126.779, 30.6704, -124.645, 35.2087, -121.18, 39.1866, -116.517, 42.4511, -110.834, 44.8768, -104.351, 46.3706, -97.3159, 47, -90, 36.375, -90, 36.0724, -94.3895, 35.1761, -98.6104, 33.7206, -102.5, 31.7619, -105.91, 29.3752, -108.708, 26.6523, -110.787, 23.6977, -112.068, 20.625, -112.5, 17.5523, -112.068, 14.5977, -110.787, 11.8748, -108.708, 9.48807, -105.91, 7.52935, -102.5, 6.07389, -98.6104, 5.57568, -96.2641, 5.25, -92.7767, 5.25, 37.5, -5.25, 37.5, -5.25, -90, -5.25, -92.2958, -5.1791, -95.5107, -5.00771, -97.8208, -4.78816, -99.4493, -3.62684, -104.351, -1.20108, -110.834, 2.06344, -116.517, 6.04129, -121.18, 10.5796, -124.645, 15.5039, -126.779, 20.625, -127.5)
+script = ExtResource("1_dp5vp")
+backup_data = PackedVector2Array(25.7461, -126.779, 30.6704, -124.645, 35.2087, -121.18, 39.1866, -116.517, 42.4511, -110.834, 44.8768, -104.351, 46.3706, -97.3159, 47, -90, 36.375, -90, 36.0724, -94.3895, 35.1761, -98.6104, 33.7206, -102.5, 31.7619, -105.91, 29.3752, -108.708, 26.6523, -110.787, 23.6977, -112.068, 20.625, -112.5, 17.5523, -112.068, 14.5977, -110.787, 11.8748, -108.708, 9.48807, -105.91, 7.52935, -102.5, 6.07389, -98.6104, 5.57568, -96.2641, 5.25, -92.7767, 5.25, 37.5, -5.25, 37.5, -5.25, -90, -5.25, -92.2958, -5.1791, -95.5107, -5.00771, -97.8208, -4.78816, -99.4493, -3.62684, -104.351, -1.20108, -110.834, 2.06344, -116.517, 6.04129, -121.18, 10.5796, -124.645, 15.5039, -126.779, 20.625, -127.5)
+
+[node name="Shapes" type="Node2D" parent="."]
+position = Vector2(-86.935, 0)
+script = ExtResource("2_3i8my")
+shape_pos = Vector2(0, 60)
+logic_stack = Array[ExtResource("3_8rokj")]([SubResource("Resource_c5fls")])
+draw_mode = 1
+override_color = Color(0, 1, 1, 1)
+
+[node name="A" type="Polygon2D" parent="."]
+position = Vector2(109, 0)
+color = Color(0, 0, 0, 0.482353)
+polygon = PackedVector2Array(24.5196, 29.8773, 23.097, 34.5671, 20.7867, 38.8893, 17.6777, 42.6777, 13.8893, 45.7867, 9.56709, 48.097, 4.87726, 49.5196, 0, 50, -4.87726, 49.5196, -9.56709, 48.097, -13.8893, 45.7867, -17.6777, 42.6777, -20.7867, 38.8893, -23.097, 34.5671, -24.5196, 29.8773, -25, 25, -25, -25, -24.5196, -29.8773, -23.097, -34.5671, -20.7867, -38.8893, -17.6777, -42.6777, -13.8893, -45.7867, -9.56709, -48.097, -4.87726, -49.5196, 0, -80, 4.87726, -49.5196, 9.56709, -48.097, 13.8893, -45.7867, 17.6777, -42.6777, 20.7867, -38.8893, 23.097, -34.5671, 24.5196, -29.8773, 25, -25, 25, 25)
+script = ExtResource("4_ogk2a")
+
+[node name="Spike" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(284, 2)
+color = Color(0, 0, 0, 0.482353)
+polygon = PackedVector2Array(-42.6777, 17.6777, 7.32233, 17.6777, 25, 0, 17.6777, -17.6777, -25, 0)
+script = ExtResource("5_kx6f4")
+arc_angle = 0.0
+logic_stack = Array[ExtResource("3_8rokj")]([SubResource("Resource_26nuy")])
+
+[node name="Circular Arc" type="Node2D" parent="."]
+visible = false
+script = ExtResource("5_kx6f4")
+arc_angle = 360.0
+logic_stack = Array[ExtResource("3_8rokj")]([SubResource("Resource_76sb6")])
+
+[node name="jj" type="Node2D" parent="."]
+position = Vector2(0, 300)
+script = ExtResource("6_qp5in")
+private_logic_stack = Array[ExtResource("7_c5fls")]([SubResource("Resource_plxdi"), SubResource("Resource_fcfji"), SubResource("Resource_rq5xv")])
+draw_mode = 1
+override_color = Color(0, 1, 1, 1)

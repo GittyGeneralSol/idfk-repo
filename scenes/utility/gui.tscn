@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://djol0yllnue6i"]
+
+[ext_resource type="Script" uid="uid://p4cnllfuprod" path="res://scripts/utility/gui.gd" id="1_gtpsb"]
+[ext_resource type="Script" uid="uid://k1gpxntwgrlf" path="res://scripts/utility/mobile_tap_move.gd" id="2_dqbu1"]
+[ext_resource type="Script" uid="uid://ciefchhmo5l4r" path="res://scripts/utility/buttons/common_buttons.gd" id="3_5ceqb"]
+[ext_resource type="Script" uid="uid://clopk7g48rnx5" path="res://scripts/utility/buttons/hexagonal_buttons.gd" id="4_meyn7"]
+[ext_resource type="PackedScene" uid="uid://c8rjk1dv7jnv0" path="res://scenes/utility/polygon_button.tscn" id="5_meyn7"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_gtpsb")
+
+[node name="MobileTapMove" type="Node" parent="."]
+script = ExtResource("2_dqbu1")
+
+[node name="CommonButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_5ceqb")
+button_colors = PackedColorArray(0.498039, 1, 0, 1, 0.254902, 0.411765, 0.882353, 1, 0.466667, 0.533333, 0.6, 1, 0.466667, 0.533333, 0.6, 1)
+action_strings = PackedStringArray("button_one", "game_load", "default", "default")
+
+[node name="HexContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -100.0
+offset_right = 104.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HexagonalButtons" type="Control" parent="HexContainer"]
+layout_mode = 2
+script = ExtResource("4_meyn7")
+
+[node name="Control" type="Control" parent="HexContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BuildButton" parent="HexContainer/Control" instance=ExtResource("5_meyn7")]
+position = Vector2(50, 50)
+num_points = 6
+snap_points = false
+def_button_color = Color(0.384277, 0.339961, 1, 1)
+switch_button_color = Color(0.384314, 0.341176, 1, 1)
+rotation_deg = 0.0
+outline_correction = -4.51
+action_string = "build_button"
+
+[node name="Control2" type="Control" parent="HexContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DestroyButton" parent="HexContainer/Control2" instance=ExtResource("5_meyn7")]
+position = Vector2(50, 50)
+num_points = 6
+snap_points = false
+def_button_color = Color(0.874678, 0, 0.211384, 1)
+switch_button_color = Color(0.87451, 0, 0.211765, 1)
+rotation_deg = 0.0
+outline_correction = -4.51
+action_string = "destroy_button"

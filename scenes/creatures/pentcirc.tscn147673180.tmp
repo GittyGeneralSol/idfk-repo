@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpgbl0g1vjt88"]
+
+[ext_resource type="Script" uid="uid://b5xr0gjuke8os" path="res://scripts/Creatures/Pentcirc/pentcirc.gd" id="1_do88e"]
+[ext_resource type="Script" uid="uid://b5khsyyhix70s" path="res://scripts/Creatures/Pentcirc/body.gd" id="1_oyd5y"]
+[ext_resource type="Script" uid="uid://b7coj7pjx6bi8" path="res://scripts/Creatures/Pentcirc/decoration.gd" id="2_li8sf"]
+[ext_resource type="Script" uid="uid://du7upu5ij78r" path="res://scripts/Creatures/Pentcirc/eyes.gd" id="3_xx3vr"]
+[ext_resource type="Script" uid="uid://cjq6lh6xpwpnb" path="res://scripts/Creatures/Pentcirc/lids_main_left.gd" id="4_jqeov"]
+[ext_resource type="Script" uid="uid://cxsblei8v0ppg" path="res://scripts/Creatures/Pentcirc/lids_main_right.gd" id="5_1sasv"]
+[ext_resource type="Script" uid="uid://engpy8wvj6as" path="res://scripts/Creatures/Pentcirc/sidelids_topleft.gd" id="6_h0w16"]
+[ext_resource type="Script" uid="uid://6hcvfowqkgxc" path="res://scripts/Creatures/Pentcirc/sidelids_topright.gd" id="7_fhw65"]
+[ext_resource type="Script" uid="uid://ih8ledn1se1i" path="res://scripts/Creatures/Pentcirc/sidelids_bottomleft.gd" id="8_7k21w"]
+[ext_resource type="Script" uid="uid://cr8x0118bsc4" path="res://scripts/Creatures/Pentcirc/sidelids_bottomright.gd" id="9_fov5d"]
+
+[node name="Pentcirc" type="Node2D"]
+script = ExtResource("1_do88e")
+
+[node name="body" type="Node2D" parent="."]
+script = ExtResource("1_oyd5y")
+
+[node name="decoration" type="Node2D" parent="."]
+script = ExtResource("2_li8sf")
+
+[node name="eyes" type="Node2D" parent="."]
+z_index = 5
+script = ExtResource("3_xx3vr")
+
+[node name="lids_main_left" type="Node2D" parent="eyes"]
+script = ExtResource("4_jqeov")
+eye_radius = 20.1
+eye_center = Vector2(-25, 0)
+eyelid_color_top = Color(0.513726, 0, 1, 1)
+eyelid_color_bottom = Color(0.513726, 0, 1, 1)
+
+[node name="lids_main_right" type="Node2D" parent="eyes"]
+script = ExtResource("5_1sasv")
+eye_radius = 20.1
+eye_center = Vector2(25, 0)
+eyelid_color_top = Color(0.513726, 0, 1, 1)
+eyelid_color_bottom = Color(0.513726, 0, 1, 1)
+
+[node name="sidelids_topleft" type="Node2D" parent="eyes"]
+script = ExtResource("6_h0w16")
+eye_radius = 15.1
+eye_center = Vector2(-45, -25)
+eyelid_color_top = Color(0.513726, 0, 1, 1)
+eyelid_color_bottom = Color(0.513726, 0, 1, 1)
+
+[node name="sidelids_topright" type="Node2D" parent="eyes"]
+script = ExtResource("7_fhw65")
+eye_radius = 15.1
+eye_center = Vector2(45, -25)
+eyelid_color_top = Color(0.513726, 0, 1, 1)
+eyelid_color_bottom = Color(0.513726, 0, 1, 1)
+
+[node name="sidelids_bottomleft" type="Node2D" parent="eyes"]
+script = ExtResource("8_7k21w")
+eye_radius = 15.1
+eye_center = Vector2(-45, 25)
+eyelid_color_top = Color(0.513726, 0, 1, 1)
+eyelid_color_bottom = Color(0.513726, 0, 1, 1)
+
+[node name="sidelids_bottomright" type="Node2D" parent="eyes"]
+script = ExtResource("9_fov5d")
+eye_radius = 15.1
+eye_center = Vector2(45, 25)
+eyelid_color_top = Color(0.513726, 0, 1, 1)
+eyelid_color_bottom = Color(0.513726, 0, 1, 1)
+
+[node name="blink_trigger" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="initial_move_trigger" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

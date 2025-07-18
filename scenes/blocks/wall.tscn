@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8q1r1v2jyqfs"]
+
+[ext_resource type="PackedScene" uid="uid://db2p40x20ktkv" path="res://scenes/blocks/base_block.tscn" id="1_ffulj"]
+[ext_resource type="Script" uid="uid://bcx0rxcvsml8l" path="res://scripts/blocks/wall/wall.gd" id="2_dw7oq"]
+[ext_resource type="Script" uid="uid://vfvl6wlt1qfc" path="res://scripts/blocks/wall/body.gd" id="2_kvty4"]
+[ext_resource type="Script" uid="uid://cv232h1ltkn54" path="res://scripts/blocks/wall/deco.gd" id="3_dw7oq"]
+[ext_resource type="Script" uid="uid://d3twhp2olph5m" path="res://scripts/blocks/wall/outline.gd" id="4_qltaj"]
+[ext_resource type="Script" uid="uid://cy2ts700pxm0f" path="res://scripts/blocks/wall/wall_lines.gd" id="5_qltaj"]
+[ext_resource type="Script" uid="uid://dk2ji7vsl7tyj" path="res://scripts/custom_polygon/custom_shape_logic.gd" id="7_c3igh"]
+
+[sub_resource type="Resource" id="Resource_c3igh"]
+script = ExtResource("7_c3igh")
+params = {
+"color": Color(0, 0, 0, 1),
+"rotation": 0.0,
+"shape_type": 1,
+"size": Vector2(220, 220)
+}
+
+[node name="wall" instance=ExtResource("1_ffulj")]
+script = ExtResource("2_dw7oq")
+is_frozen = false
+
+[node name="body" parent="." index="0"]
+script = ExtResource("2_kvty4")
+
+[node name="deco" parent="body" index="0"]
+script = ExtResource("3_dw7oq")
+
+[node name="wall_lines" type="Node2D" parent="." index="1"]
+script = ExtResource("5_qltaj")
+width = 20.0
+
+[node name="outline" parent="." index="2"]
+script = ExtResource("4_qltaj")
+shape = SubResource("Resource_c3igh")

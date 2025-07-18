@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://14qc2k3a3ruv"]
+
+[ext_resource type="PackedScene" uid="uid://db2p40x20ktkv" path="res://scenes/blocks/base_block.tscn" id="1_2uduq"]
+[ext_resource type="Script" uid="uid://dp1g0ja4x5je4" path="res://scripts/blocks/stone_block/stone_block.gd" id="2_s0aq0"]
+[ext_resource type="Script" uid="uid://5r0fimqlmtdu" path="res://scripts/blocks/stone_block/body.gd" id="3_0g7ux"]
+[ext_resource type="Script" uid="uid://blylavr7nek0s" path="res://scripts/blocks/stone_block/outline.gd" id="3_s0aq0"]
+[ext_resource type="Script" uid="uid://dj3t3syckjius" path="res://scripts/blocks/stone_block/deco.gd" id="4_l26gq"]
+[ext_resource type="Script" uid="uid://dk2ji7vsl7tyj" path="res://scripts/custom_polygon/custom_shape_logic.gd" id="6_0g7ux"]
+
+[sub_resource type="Resource" id="Resource_0g7ux"]
+script = ExtResource("6_0g7ux")
+params = {
+"color": Color(0.466667, 0.533333, 0.6, 1),
+"position": Vector2(0, 0),
+"rotation": 0.0,
+"shape_type": 1,
+"size": Vector2(200, 200)
+}
+
+[sub_resource type="Resource" id="Resource_ic25h"]
+script = ExtResource("6_0g7ux")
+params = {
+"color": Color(0.439216, 0.501961, 0.564706, 1),
+"num_points": 6,
+"position": Vector2(0, 0),
+"radius": 125.0,
+"rotation": -45.0,
+"shape_type": 2
+}
+
+[sub_resource type="Resource" id="Resource_5tken"]
+script = ExtResource("6_0g7ux")
+params = {
+"color": Color(0.414216, 0.476961, 0.539706, 1),
+"num_points": 4,
+"position": Vector2(0, 0),
+"radius": 90.0,
+"rotation": -45.0,
+"shape_type": 2
+}
+
+[sub_resource type="Resource" id="Resource_er2qi"]
+script = ExtResource("6_0g7ux")
+params = {
+"color": Color(0.389216, 0.451961, 0.514706, 1),
+"num_points": 6,
+"position": Vector2(0, 0),
+"radius": 55.0,
+"rotation": -45.0,
+"shape_type": 2
+}
+
+[sub_resource type="Resource" id="Resource_abqw0"]
+script = ExtResource("6_0g7ux")
+params = {
+"color": Color(0.364216, 0.426961, 0.489706, 1),
+"num_points": 4,
+"position": Vector2(0, 0),
+"radius": 20.0,
+"rotation": -45.0,
+"shape_type": 2
+}
+
+[sub_resource type="Resource" id="Resource_34f7d"]
+script = ExtResource("6_0g7ux")
+params = {
+"color": Color(0, 0, 0, 1),
+"filled": false,
+"position": Vector2(0, 0),
+"rotation": 0.0,
+"shape_type": 1,
+"size": Vector2(200, 200),
+"width": 20.0
+}
+
+[node name="stoneblock" instance=ExtResource("1_2uduq")]
+script = ExtResource("2_s0aq0")
+
+[node name="body" parent="." index="0"]
+script = ExtResource("3_0g7ux")
+part_properties = {
+"parent_part": &"stoneblock",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+logic_stack = Array[ExtResource("6_0g7ux")]([SubResource("Resource_0g7ux")])
+
+[node name="deco" parent="body" index="0"]
+script = ExtResource("4_l26gq")
+shapes = Array[ExtResource("6_0g7ux")]([SubResource("Resource_ic25h"), SubResource("Resource_5tken"), SubResource("Resource_er2qi"), SubResource("Resource_abqw0")])
+
+[node name="outline" parent="." index="1"]
+clip_children = 2
+script = ExtResource("3_s0aq0")
+part_type = 0
+pulsing = false
+spinning = false
+part_properties = {
+"parent_part": &"stoneblock",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+logic_stack = Array[ExtResource("6_0g7ux")]([SubResource("Resource_34f7d")])
+draw_mode = 0
+override_color = Color(1, 1, 1, 1)

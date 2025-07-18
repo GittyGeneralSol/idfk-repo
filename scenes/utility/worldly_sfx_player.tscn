@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8oxhvgyp5xqo"]
+
+[ext_resource type="Script" uid="uid://cacb0i6fwtscf" path="res://scripts/utility/sfx_player.gd" id="1_atrdm"]
+
+[node name="WorldlySFXPlayer" type="AudioStreamPlayer2D"]
+volume_db = 12.0
+attenuation = 2.0
+script = ExtResource("1_atrdm")

@@ -1,0 +1,188 @@
+[gd_scene load_steps=9 format=3 uid="uid://68dl6gluos8h"]
+
+[ext_resource type="Script" uid="uid://d0mchce4jo2kp" path="res://scripts/creatures/hepthuge/hepthuge.gd" id="1_ajml5"]
+[ext_resource type="Script" uid="uid://cnb5hsh7b1d07" path="res://scripts/creatures/hepthuge/body.gd" id="2_tsog0"]
+[ext_resource type="Script" uid="uid://bepnfgw3trn1l" path="res://scripts/creatures/hepthuge/eyes.gd" id="3_swokt"]
+[ext_resource type="Script" uid="uid://d138vkpwu5nc4" path="res://scripts/creatures/hepthuge/decoration.gd" id="4_swokt"]
+[ext_resource type="Script" uid="uid://b6c2ejry1w2xp" path="res://scripts/creatures/hepthuge/rendering_test.gd" id="5_sequ4"]
+[ext_resource type="Script" uid="uid://dk2ji7vsl7tyj" path="res://scripts/custom_polygon/custom_shape_logic.gd" id="6_nemf3"]
+
+[sub_resource type="Resource" id="Resource_5xdhx"]
+script = ExtResource("6_nemf3")
+params = {
+"length": 400.0,
+"rotation": 0.0,
+"shape_type": 6,
+"width": 10
+}
+
+[sub_resource type="Resource" id="Resource_evs6w"]
+script = ExtResource("6_nemf3")
+params = {
+"length": 346.41,
+"rotation": -90.0,
+"shape_type": 6,
+"width": 10
+}
+
+[node name="Hexhuge" type="Node2D"]
+script = ExtResource("1_ajml5")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("2_tsog0")
+part_properties = {
+"body_properties": {
+"body_color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 0.545098
+},
+"body_type": "POLYGON",
+"draw_outline": true,
+"num_points": 6,
+"radius": 280
+},
+"parent_part": &"Hexhuge",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="deco" type="Node2D" parent="body"]
+script = ExtResource("4_swokt")
+part_type = 1
+part_properties = {
+"deco_properties": {
+"shape_0": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 1.0
+},
+"length": 220.0,
+"position": {
+"x": 192.679,
+"y": -111.244
+},
+"rotation": 150.0,
+"shape_type": "LINE",
+"width": 13.0
+},
+"shape_1": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 1.0
+},
+"length": 220.0,
+"position": {
+"x": 192.679,
+"y": 111.244
+},
+"rotation": 210.0,
+"shape_type": "LINE",
+"width": 13.0
+},
+"shape_2": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 1.0
+},
+"length": 220.0,
+"position": {
+"x": -9.72522e-06,
+"y": 222.487
+},
+"rotation": 270.0,
+"shape_type": "LINE",
+"width": 13.0
+},
+"shape_3": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 1.0
+},
+"length": 220.0,
+"position": {
+"x": -192.679,
+"y": 111.244
+},
+"rotation": 330.0,
+"shape_type": "LINE",
+"width": 13.0
+},
+"shape_4": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 1.0
+},
+"length": 220.0,
+"position": {
+"x": -192.679,
+"y": -111.244
+},
+"rotation": 390.0,
+"shape_type": "LINE",
+"width": 13.0
+},
+"shape_5": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.0,
+"r": 1.0
+},
+"length": 220.0,
+"position": {
+"x": 2.65313e-06,
+"y": -222.487
+},
+"rotation": 450.0,
+"shape_type": "LINE",
+"width": 13.0
+}
+},
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "DECO",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eyes" type="Node2D" parent="."]
+script = ExtResource("3_swokt")
+
+[node name="blink_trigger" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="initial_move_trigger" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="RENDERING_TEST" type="Node2D" parent="."]
+visible = false
+script = ExtResource("5_sequ4")
+logic_stack = Array[ExtResource("6_nemf3")]([SubResource("Resource_5xdhx"), SubResource("Resource_evs6w")])
+
+[connection signal="timeout" from="blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

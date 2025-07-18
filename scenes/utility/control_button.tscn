@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqyynnl6vvv4l"]
+
+[ext_resource type="Script" uid="uid://bppr1v8l862wb" path="res://scripts/utility/buttons/control_button.gd" id="1_oycdl"]
+
+[node name="ControlButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_oycdl")
+
+[node name="ButtonArea2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ButtonArea2D"]
+polygon = PackedVector2Array(25, -25, 25, 25, -25, 25, -25, -25)
+
+[node name="cooldown_timer" type="Timer" parent="."]
+
+[connection signal="input_event" from="ButtonArea2D" to="." method="_on_button_area_2d_input_event"]
+[connection signal="mouse_entered" from="ButtonArea2D" to="." method="_on_button_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="ButtonArea2D" to="." method="_on_button_area_2d_mouse_exited"]

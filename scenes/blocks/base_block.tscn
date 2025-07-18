@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://db2p40x20ktkv"]
+
+[ext_resource type="Script" uid="uid://dlwogohjg7qjt" path="res://scripts/blocks/base_block/base_block.gd" id="1_bqm14"]
+[ext_resource type="Script" uid="uid://dkfffbhd3icy7" path="res://scripts/blocks/base_block/outline.gd" id="2_qbqb3"]
+[ext_resource type="Script" uid="uid://dk2ji7vsl7tyj" path="res://scripts/custom_polygon/custom_shape_logic.gd" id="3_i0wrl"]
+
+[sub_resource type="Resource" id="Resource_i0wrl"]
+script = ExtResource("3_i0wrl")
+params = {
+"color": Color(0, 0, 0, 1),
+"rotation": 0.0,
+"shape_type": 1,
+"size": Vector2(220, 220)
+}
+
+[node name="block" type="Node2D"]
+z_index = 1000
+script = ExtResource("1_bqm14")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+
+[node name="deco" type="Node2D" parent="body"]
+
+[node name="outline" type="Node2D" parent="."]
+z_index = -1
+script = ExtResource("2_qbqb3")
+shape = SubResource("Resource_i0wrl")

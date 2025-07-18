@@ -1,0 +1,137 @@
+[gd_scene load_steps=5 format=3 uid="uid://jem2hn7wjs2h"]
+
+[ext_resource type="Script" uid="uid://nw04ho6n35" path="res://scripts/creatures/sparkly/sparkly.gd" id="1_ngqbg"]
+[ext_resource type="Script" uid="uid://cn6jrgb8os541" path="res://scripts/creatures/sparkly/body.gd" id="2_xeeqq"]
+[ext_resource type="Script" uid="uid://fylfnhx71wc2" path="res://scripts/creatures/sparkly/eye.gd" id="3_dr27a"]
+[ext_resource type="Script" uid="uid://b4isby0rkcmje" path="res://scripts/creatures/sparkly/deco.gd" id="3_mpc5l"]
+
+[node name="Sparkly" type="Node2D"]
+script = ExtResource("1_ngqbg")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("2_xeeqq")
+part_properties = {
+"body_properties": {
+"body_color": {
+"a": 1.0,
+"b": 0.498039,
+"g": 1.0,
+"r": 0.0
+},
+"body_type": "DIAMOND",
+"height": 50.0,
+"width": 25.0
+},
+"parent_part": &"Sparkly",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="deco" type="Node2D" parent="body"]
+script = ExtResource("3_mpc5l")
+part_type = 1
+part_properties = {
+"deco_properties": {
+"shape_0": {
+"color": {
+"a": 1.0,
+"b": 0.698824,
+"g": 1.0,
+"r": 0.4
+},
+"position": {
+"x": 0.0,
+"y": -20.0
+},
+"radius": 5.0,
+"rotation": -90,
+"shape_type": "POLYGON"
+},
+"shape_1": {
+"color": {
+"a": 1.0,
+"b": 0.698824,
+"g": 1.0,
+"r": 0.4
+},
+"position": {
+"x": 0.0,
+"y": 20.0
+},
+"radius": 5.0,
+"rotation": 90,
+"shape_type": "POLYGON"
+}
+},
+"parent_part": &"body",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "DECO",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eye" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("3_dr27a")
+part_type = 2
+part_properties = {
+"eye_properties": {
+"blink_type": "OPENNESS",
+"eye_color": {
+"a": 1.0,
+"b": 0.949804,
+"g": 1.0,
+"r": 0.9
+},
+"eye_type": "DIAMOND",
+"eyelid_props": {
+"eyelid_color_bottom": {
+"a": 1.0,
+"b": 0.398431,
+"g": 0.8,
+"r": 0.0
+},
+"eyelid_color_top": {
+"a": 1.0,
+"b": 0.398431,
+"g": 0.8,
+"r": 0.0
+},
+"lid_type": "TWOLID"
+},
+"height": 25.0,
+"width": 12.5
+},
+"parent_part": &"Sparkly",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="Blink_trigger" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="Initial_move_trigger" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="Initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

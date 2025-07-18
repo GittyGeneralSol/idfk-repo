@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://po447a68w4o6"]
+
+[ext_resource type="Script" uid="uid://clopk7g48rnx5" path="res://scripts/utility/buttons/hexagonal_buttons.gd" id="1_0vlex"]
+[ext_resource type="PackedScene" uid="uid://c8rjk1dv7jnv0" path="res://scenes/utility/polygon_button.tscn" id="2_0ikov"]
+
+[node name="HexagonalButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 678.0
+offset_top = 566.0
+offset_right = 678.0
+offset_bottom = 566.0
+script = ExtResource("1_0vlex")
+
+[node name="BuildButton" parent="." instance=ExtResource("2_0ikov")]
+position = Vector2(30, 17)
+num_points = 6
+snap_points = false
+def_button_color = Color(0.384277, 0.339961, 1, 1)
+switch_button_color = Color(0.384314, 0.341176, 1, 1)
+rotation_deg = 0.0
+outline_correction = -4.51
+action_string = "build_button"
+
+[node name="DestroyButton" parent="." instance=ExtResource("2_0ikov")]
+position = Vector2(-31, -18)
+num_points = 6
+snap_points = false
+def_button_color = Color(0.874678, 0, 0.211384, 1)
+switch_button_color = Color(0.87451, 0, 0.211765, 1)
+rotation_deg = 0.0
+outline_correction = -4.51
+action_string = "destroy_button"

@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://uofuf0tab168"]
+
+[ext_resource type="PackedScene" uid="uid://db2p40x20ktkv" path="res://scenes/blocks/base_block.tscn" id="1_xo3re"]
+[ext_resource type="Script" uid="uid://ehgbn4abekhd" path="res://scripts/blocks/tree_stump/tree_stump.gd" id="2_8wrm1"]
+[ext_resource type="Script" uid="uid://dec5ro33crv45" path="res://scripts/blocks/tree_stump/body.gd" id="2_c6oid"]
+[ext_resource type="Script" uid="uid://ckyhekuymqps2" path="res://scripts/blocks/tree_stump/outline.gd" id="3_8wrm1"]
+[ext_resource type="Script" uid="uid://bhyy5uf8vpwp1" path="res://scripts/blocks/tree_stump/deco.gd" id="4_igng2"]
+
+[node name="treestump" instance=ExtResource("1_xo3re")]
+script = ExtResource("2_8wrm1")
+metadata/_edit_horizontal_guides_ = [-228.0]
+
+[node name="body" parent="." index="0"]
+script = ExtResource("2_c6oid")
+
+[node name="deco" parent="body" index="0"]
+script = ExtResource("4_igng2")
+
+[node name="outline" parent="." index="1"]
+script = ExtResource("3_8wrm1")

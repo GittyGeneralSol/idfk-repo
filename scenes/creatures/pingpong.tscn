@@ -1,0 +1,115 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpfacp580hwsj"]
+
+[ext_resource type="Script" uid="uid://by0xb1jk1vjs4" path="res://scripts/creatures/pingpong/pingpong.gd" id="1_04ww0"]
+[ext_resource type="Script" uid="uid://bepsmkjsvywhk" path="res://scripts/creatures/pingpong/body.gd" id="2_04ww0"]
+[ext_resource type="Script" uid="uid://dhlo7t2ga448f" path="res://scripts/creatures/pingpong/eye.gd" id="3_3fwq6"]
+[ext_resource type="Script" uid="uid://cb2tmfrehn8vq" path="res://scripts/creatures/pingpong/decoration.gd" id="3_aygnj"]
+[ext_resource type="Script" uid="uid://7d6lyb18wnk7" path="res://scripts/creatures/pingpong/eye_system.gd" id="4_3fwq6"]
+[ext_resource type="PackedScene" uid="uid://b8oxhvgyp5xqo" path="res://scenes/utility/worldly_sfx_player.tscn" id="5_bgk7t"]
+
+[node name="Pingpong" type="Node2D"]
+z_index = -1
+script = ExtResource("1_04ww0")
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+script = ExtResource("2_04ww0")
+part_properties = {
+"body_properties": {
+"body_color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.843137,
+"r": 1.0
+},
+"body_type": "CIRCLE",
+"radius": 85,
+"shape_position": {
+"x": 0.0,
+"y": 0.0
+}
+},
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="deco" type="Node2D" parent="body"]
+script = ExtResource("3_aygnj")
+part_type = 1
+part_properties = {
+"deco_properties": {
+"shape_0": {
+"color": {
+"a": 1.0,
+"b": 0.0,
+"g": 0.758824,
+"r": 0.9
+},
+"filled": false,
+"radius": 85,
+"shape_type": "CIRCLE",
+"width": 10.0
+}
+},
+"parent_part": &"body",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "DECO",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eye_system" type="Node2D" parent="."]
+script = ExtResource("4_3fwq6")
+part_type = 4
+part_properties = {
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE_CONTAINER",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eye" type="Node2D" parent="eye_system"]
+clip_children = 2
+script = ExtResource("3_3fwq6")
+draw_outline = true
+part_type = 2
+part_properties = {
+"parent_part": &"eye_system",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "EYE",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="blink_trigger" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="initial_move_trigger" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="sfx_player" parent="." instance=ExtResource("5_bgk7t")]
+
+[connection signal="timeout" from="blink_trigger" to="." method="_on_blink_trigger_timeout"]
+[connection signal="timeout" from="initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

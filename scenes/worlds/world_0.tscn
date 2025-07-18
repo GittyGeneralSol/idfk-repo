@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://iffvd0vrus0j"]
+
+[ext_resource type="Script" uid="uid://d0hwsuqgxo7gk" path="res://scripts/worlds/world_0.gd" id="1_bjklv"]
+[ext_resource type="Script" uid="uid://dcwsot133a8uj" path="res://scripts/utility/camera_handler.gd" id="2_fw473"]
+[ext_resource type="Script" uid="uid://bf4d61imfj70g" path="res://scripts/worlds/backgrounds/bg1.gd" id="3_86yod"]
+[ext_resource type="PackedScene" uid="uid://jfaelq0ncbdn" path="res://scenes/creatures/player.tscn" id="4_fw473"]
+
+[node name="World 0" type="Node2D"]
+script = ExtResource("1_bjklv")
+world_size = Vector2(16, 16)
+bg_color = Color(0.552941, 0.552941, 0.552941, 1)
+
+[node name="CameraHandler" type="Node" parent="."]
+script = ExtResource("2_fw473")
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("3_86yod")
+z_ind = -10000
+
+[node name="Player" parent="." instance=ExtResource("4_fw473")]
+position = Vector2(200, 200)

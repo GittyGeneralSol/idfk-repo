@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://lcnmgwnahcwe"]
+
+[ext_resource type="Script" uid="uid://dy1gkfp2ocdam" path="res://scripts/worlds/world_3.gd" id="1_16qpr"]
+[ext_resource type="Script" uid="uid://dcwsot133a8uj" path="res://scripts/utility/camera_handler.gd" id="3_mi3nn"]
+[ext_resource type="Script" uid="uid://bf4d61imfj70g" path="res://scripts/worlds/backgrounds/bg1.gd" id="4_3x4n4"]
+
+[node name="World 3" type="Node2D"]
+script = ExtResource("1_16qpr")
+bg_color = Color(0.552941, 0.552941, 0.552941, 1)
+
+[node name="CameraHandler" type="Node" parent="."]
+script = ExtResource("3_mi3nn")
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("4_3x4n4")
+z_ind = -10000

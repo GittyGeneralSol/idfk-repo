@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt5yukv1dv6bx"]
+
+[ext_resource type="Script" uid="uid://dltwpbggobmeo" path="res://scripts/effects/colored_rect.gd" id="1_72rjh"]
+
+[node name="ColoredRect" type="Node2D"]
+script = ExtResource("1_72rjh")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtu500ocu35wk"]
+
+[ext_resource type="Script" uid="uid://dvvb0wfc8pgul" path="res://scenes/worlds/test.gd" id="1_a7r6y"]
+
+[node name="test" type="Node2D"]
+clip_children = 2
+script = ExtResource("1_a7r6y")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://1efxbt1v6nhw"]
+
+[ext_resource type="Script" uid="uid://y83euqh661gh" path="res://scripts/worlds/void_class.gd" id="1_hiwd4"]
+[ext_resource type="PackedScene" uid="uid://djol0yllnue6i" path="res://scenes/utility/gui.tscn" id="2_5p70u"]
+[ext_resource type="PackedScene" uid="uid://iffvd0vrus0j" path="res://scenes/worlds/world_0.tscn" id="3_orvd8"]
+
+[node name="Void" type="Node2D"]
+script = ExtResource("1_hiwd4")
+
+[node name="GUI" parent="." instance=ExtResource("2_5p70u")]
+
+[node name="World 0" parent="." instance=ExtResource("3_orvd8")]

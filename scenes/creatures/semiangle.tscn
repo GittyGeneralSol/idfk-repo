@@ -1,0 +1,172 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjbv3fnvr00to"]
+
+[ext_resource type="Script" uid="uid://c7vfw7yyyv82g" path="res://scripts/creatures/semiangle/semiangle.gd" id="1_nbofa"]
+[ext_resource type="Script" uid="uid://cq8wehh43nnew" path="res://scripts/creatures/semiangle/body.gd" id="2_jx1ip"]
+[ext_resource type="Script" uid="uid://c0l4nxfe0lhgt" path="res://scripts/creatures/semiangle/eyes.gd" id="3_2mbfg"]
+[ext_resource type="Script" uid="uid://b747evsaguorg" path="res://scripts/creatures/semiangle/decoration.gd" id="5_08ahw"]
+[ext_resource type="Script" uid="uid://d0iapxarf5lvg" path="res://scripts/creatures/semiangle/animation_player.gd" id="5_jx1ip"]
+
+[sub_resource type="Animation" id="Animation_jx1ip"]
+resource_name = "Pulsing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6667, 1.3333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.785398, -0.785398, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 4
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.12414]
+}
+
+[sub_resource type="Animation" id="Animation_2mbfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmm1k"]
+_data = {
+&"Pulsing": SubResource("Animation_jx1ip"),
+&"RESET": SubResource("Animation_2mbfg")
+}
+
+[node name="Semiangle" type="Node2D"]
+z_index = 5
+script = ExtResource("1_nbofa")
+metadata/_custom_type_script = "uid://c6t6ynnj3eesk"
+
+[node name="body" type="Node2D" parent="."]
+clip_children = 2
+z_index = 5
+script = ExtResource("2_jx1ip")
+part_properties = {
+"body_properties": {
+"angle": 360.0,
+"body_color": {
+"a": 1.0,
+"b": 0.0,
+"g": 1.0,
+"r": 0.0
+},
+"body_type": "CIRCLE",
+"radius": 85
+},
+"parent_part": null,
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "MAIN_BODY",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="eyes_container" type="Node2D" parent="."]
+z_index = 15
+script = ExtResource("3_2mbfg")
+shape_pos = Vector2(-63.5, 5)
+
+[node name="decoration" type="Node2D" parent="eyes_container"]
+z_index = 10
+z_as_relative = false
+script = ExtResource("5_08ahw")
+part_type = 1
+part_properties = {
+"deco_properties": {
+"shape_0": {
+"color": {
+"a": 1.0,
+"b": 0.698824,
+"g": 1.0,
+"r": 0.4
+},
+"radius": 20.0,
+"shape_type": "CIRCLE"
+}
+},
+"parent_part": &"eyes_container",
+"part_position": {
+"x": 0.0,
+"y": 0.0
+},
+"part_rotation": 0.0,
+"part_type": "DECO",
+"pulsing": false,
+"spinning": false
+}
+
+[node name="Initial_move_trigger" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vmm1k")
+}
+script = ExtResource("5_jx1ip")
+
+[connection signal="timeout" from="Initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

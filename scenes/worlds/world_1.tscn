@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://br6hbugpy2gyt"]
+
+[ext_resource type="Script" uid="uid://cq860tuhupi8a" path="res://scripts/worlds/world_1.gd" id="1_uhyjc"]
+[ext_resource type="Script" uid="uid://bf4d61imfj70g" path="res://scripts/worlds/backgrounds/bg1.gd" id="2_mqxdf"]
+[ext_resource type="Script" uid="uid://dcwsot133a8uj" path="res://scripts/utility/camera_handler.gd" id="3_nea8h"]
+[ext_resource type="PackedScene" uid="uid://buykg26b8ysjy" path="res://scenes/objects/starpouch.tscn" id="6_0x1el"]
+[ext_resource type="PackedScene" uid="uid://cqfrdg4p5g73r" path="res://scenes/effects/colored_rects.tscn" id="7_hbdd5"]
+[ext_resource type="PackedScene" uid="uid://bgbe7m8lnvx8c" path="res://scenes/creatures/deltsqu.tscn" id="7_l4b44"]
+[ext_resource type="PackedScene" uid="uid://cw6mxbx44k6mj" path="res://scenes/creatures/tristar.tscn" id="9_s0mag"]
+[ext_resource type="PackedScene" uid="uid://68dl6gluos8h" path="res://scenes/creatures/hexhuge.tscn" id="10_uhyjc"]
+
+[node name="World 1" type="Node2D"]
+script = ExtResource("1_uhyjc")
+world_size = Vector2(20, 20)
+
+[node name="CameraHandler" type="Node" parent="."]
+script = ExtResource("3_nea8h")
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -500
+script = ExtResource("2_mqxdf")
+
+[node name="Starpouch" parent="." instance=ExtResource("6_0x1el")]
+position = Vector2(1000, 1000)
+
+[node name="Deltsqu" parent="." instance=ExtResource("7_l4b44")]
+position = Vector2(-93, 769)
+
+[node name="Deltsqu2" parent="." instance=ExtResource("7_l4b44")]
+position = Vector2(-199, 974)
+
+[node name="ColoredRects" parent="." instance=ExtResource("7_hbdd5")]
+position = Vector2(27, 412)
+rect_height = 20.0
+rect_width = 20.0
+max_size_variation = Vector2(10, 10)
+max_displ = Vector2(100, 100)
+
+[node name="Tristar" parent="." instance=ExtResource("9_s0mag")]
+position = Vector2(-554, 111)
+
+[node name="Hepthuge" parent="." instance=ExtResource("10_uhyjc")]
+position = Vector2(-449, 1542)

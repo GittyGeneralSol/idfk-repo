@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv8xdc46hrtdw"]
+
+[ext_resource type="Script" uid="uid://lgb1t51cqw5l" path="res://scripts/utility/select_grid_pos.gd" id="1_e3ues"]
+
+[node name="Selector" type="Node2D"]
+script = ExtResource("1_e3ues")

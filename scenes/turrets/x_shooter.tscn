@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0r6yufe3087"]
+
+[ext_resource type="Script" uid="uid://1h64ibuehent" path="res://scripts/turrets/x_shooter/x_shooter.gd" id="1_4pfpc"]
+[ext_resource type="Script" uid="uid://dg1du3g6a8h38" path="res://scripts/turrets/x_shooter/body.gd" id="2_7dch3"]
+[ext_resource type="PackedScene" uid="uid://dh4coqo2utp5d" path="res://scenes/turrets/guns/gun_simple.tscn" id="3_7dch3"]
+[ext_resource type="Script" uid="uid://ckdx21oi0jacy" path="res://scripts/turrets/x_shooter/inner.gd" id="3_ldx2b"]
+[ext_resource type="Script" uid="uid://d1nlwe8ba44aa" path="res://scripts/turrets/x_shooter/inner_double.gd" id="4_lw4et"]
+[ext_resource type="Script" uid="uid://b6wohunt2s335" path="res://scripts/turrets/x_shooter/core.gd" id="5_ebkey"]
+[ext_resource type="Script" uid="uid://bmwyrugw4gd1p" path="res://scripts/turrets/x_shooter/energy_pulse.gd" id="6_wcn7i"]
+
+[node name="X-Shooter" type="Node2D"]
+script = ExtResource("1_4pfpc")
+
+[node name="body" type="Node2D" parent="."]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("2_7dch3")
+
+[node name="rot_control" type="Node2D" parent="body"]
+
+[node name="GunSimple" parent="body/rot_control" instance=ExtResource("3_7dch3")]
+
+[node name="inner" type="Node2D" parent="body/rot_control"]
+clip_children = 2
+rotation = -0.785398
+scale = Vector2(0.7, 0.7)
+script = ExtResource("3_ldx2b")
+
+[node name="inner_double" type="Node2D" parent="body/rot_control/inner"]
+scale = Vector2(0.428571, 0.428571)
+script = ExtResource("4_lw4et")
+
+[node name="core" type="Node2D" parent="body/rot_control/inner"]
+scale = Vector2(0.142857, 0.142857)
+script = ExtResource("5_ebkey")
+rotation_deg = 45.0
+
+[node name="energy_pulse" type="Node2D" parent="body/rot_control/inner"]
+scale = Vector2(0.848636, 0.848636)
+script = ExtResource("6_wcn7i")
+rotation_deg = 45.0
+
+[node name="BulletContainer" type="Node2D" parent="."]

@@ -21,4 +21,5 @@ func update_params():
     }
 
 func update_deco():
-    decoration.base_positions = points_body
+    if decoration:
+        decoration.base_positions = points_body

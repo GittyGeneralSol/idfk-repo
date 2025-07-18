@@ -1,4 +1,4 @@
-extends RefCounted
+extends AnimationPlayer
 class_name CreatureMover
 
 enum MoveType { SQUISH, SLIDE, FLOAT }
@@ -252,5 +252,6 @@ func _animate_bump(direction: Vector2, time_to_move: float):
     return_tween.tween_property(_owner, "scale", Vector2.ONE, time_to_move / 2.0)
 
     await return_tween.finished
+
 
 #endregion

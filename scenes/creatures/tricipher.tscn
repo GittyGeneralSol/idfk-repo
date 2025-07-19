@@ -53,7 +53,7 @@ _data = {
 script = ExtResource("1_6eh5a")
 
 [node name="body" type="Node2D" parent="."]
-scale = Vector2(1.00489, 1.00489)
+scale = Vector2(1.02536, 1.02536)
 script = ExtResource("2_mangs")
 pulsing = true
 part_properties = {
@@ -192,7 +192,7 @@ part_properties = {
 }
 
 [node name="eye_system" type="Node2D" parent="."]
-scale = Vector2(1.00489, 1.00489)
+scale = Vector2(1.02536, 1.02536)
 script = ExtResource("5_xxa08")
 part_type = 4
 pulsing = true

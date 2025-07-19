@@ -253,19 +253,28 @@ func _cane_swing_anim():
     animation.track_insert_key(track_index, 0.0, 0)
     animation.length = 0.8
     
+    # Add Animation
+    add_anim_to_animator("cane_swing", "tricipher", animation)
+    
+    # Play
+    _animator.play("tricipher")
+    
+func add_anim_to_animator(animation_name: String, library_name: String, animation_resource: Animation):
+    var _animator: AnimationPlayer = self._animator
+    
+    if not is_instance_valid(_animator):
+        return
+    
     # Get Library
-    var library_name = "tricipher"
     var library: AnimationLibrary
     if _animator.has_animation_library(library_name):
         library = _animator.get_animation_library(library_name)
     else:
         library = AnimationLibrary.new()
     
-    # Add Animation   
-    library.add_animation("cane_swing", animation)
+    # Add Animation
+    if not library.has_animation(animation_name):
+        library.add_animation(animation_name, animation_resource)
     
-    # Give animator library
-    _animator.add_animation_library("tricipher", library)
-    
-    # Play
-    _animator.play("tricipher")
+    # Return animator library to _animator
+    _animator.add_animation_library(library_name, library)

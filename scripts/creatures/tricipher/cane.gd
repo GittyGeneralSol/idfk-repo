@@ -2,13 +2,9 @@
 
 extends BaseCreatureDeco
 
-@onready var passive_animator: AnimationPlayer = $"../../Passive Animator"
 
 func _ready() -> void:
     set_params()
-    
-    _form_cane_swing_anim()
-    passive_animator.play_animation("tricipher/cane_swing")
 
 func set_params():
     var new_stack: Array[Dictionary]
@@ -22,15 +18,9 @@ func set_params():
     
     new_stack.append(cane)
     shape_stack = new_stack
-    
+
+## Legacy code for animation 'cane_swing'
 func _form_cane_swing_anim():
-    var _animator: AnimationPlayer = passive_animator
-    
-    if not is_instance_valid(_animator):
-        return
-    
-    # Path
-    var path = _animator.get_path_to(self)
     var animation = Animation.new()
     animation.length = 0.8
     animation.loop_mode = Animation.LOOP_PINGPONG
@@ -52,6 +42,3 @@ func _form_cane_swing_anim():
     animation.track_insert_key(track_index, 0.15, Vector2.ZERO)
     animation.track_insert_key(track_index, 0.65, Vector2(50, 0))
     animation.track_insert_key(track_index, 0.8, Vector2.ZERO)
-    
-    # Add Animation
-    _animator.add_anim_to_animator("cane_swing", "tricipher", animation)

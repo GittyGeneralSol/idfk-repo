@@ -6,9 +6,6 @@ extends BaseCreatureDeco
 
 func _ready() -> void:
     set_params()
-    
-    var path = _animator.get_path_to(self)
-    print("path_to_cane: ", path)
 
 func set_params():
     var new_stack: Array[Dictionary]

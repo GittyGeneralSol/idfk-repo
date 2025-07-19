@@ -237,7 +237,7 @@ func _stop_pulse():
     return_tween.tween_property(self, "scale", Vector2.ONE, 0.75).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
     
 func _cane_swing_anim():
-    var _animator = self._animator
+    var _animator: AnimationPlayer = self._animator
     
     if not is_instance_valid(_animator):
         return
@@ -245,7 +245,27 @@ func _cane_swing_anim():
     var path = _animator.get_path_to(self)
     var animation = Animation.new()
     var track_index = animation.add_track(Animation.TYPE_VALUE)
-    animation.track_set_path(track_index, "rotation")
+    animation.track_set_interpolation_type(track_index, Animation.INTERPOLATION_CUBIC_ANGLE)
+    animation.track_set_path(track_index, path + ":rotation")
     animation.track_insert_key(track_index, 0.0, 0)
-    animation.track_insert_key(track_index, 2.0, 100)
-    animation.length = 2.0
+    animation.track_insert_key(track_index, 0.5, 45)
+    animation.track_insert_key(track_index, 0.65, 220, 0.65)
+    animation.track_insert_key(track_index, 0.0, 0)
+    animation.length = 0.8
+    
+    # Get Library
+    var library_name = "tricipher"
+    var library: AnimationLibrary
+    if _animator.has_animation_library(library_name):
+        library = _animator.get_animation_library(library_name)
+    else:
+        library = AnimationLibrary.new()
+    
+    # Add Animation   
+    library.add_animation("cane_swing", animation)
+    
+    # Give animator library
+    _animator.add_animation_library("tricipher", library)
+    
+    # Play
+    _animator.play("tricipher")

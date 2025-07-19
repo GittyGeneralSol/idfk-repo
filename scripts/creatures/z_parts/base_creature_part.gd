@@ -100,7 +100,7 @@ func get_parent_creature(obj: Node) -> Node:
 # Gets a property value using a path string like "body/circumrad"
 func get_property_by_path(path: String, caller: Node = null) -> Variant:
     # Get the creature root first.
-    var root_node = await get_parent_creature(self)
+    var root_node = get_parent_creature(self)
     if not is_instance_valid(root_node):
         printerr("Path failed: Could not find creature root from part '", self.name, "'.")
         return null
@@ -235,46 +235,3 @@ func _stop_pulse():
     
     var return_tween = create_tween()
     return_tween.tween_property(self, "scale", Vector2.ONE, 0.75).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-    
-func _cane_swing_anim():
-    var _animator: AnimationPlayer = self._animator
-    
-    if not is_instance_valid(_animator):
-        return
-    
-    var path = _animator.get_path_to(self)
-    var animation = Animation.new()
-    var track_index = animation.add_track(Animation.TYPE_VALUE)
-    animation.track_set_interpolation_type(track_index, Animation.INTERPOLATION_CUBIC_ANGLE)
-    animation.track_set_path(track_index, path + ":rotation")
-    animation.track_insert_key(track_index, 0.0, 0)
-    animation.track_insert_key(track_index, 0.5, 45)
-    animation.track_insert_key(track_index, 0.65, 220, 0.65)
-    animation.track_insert_key(track_index, 0.0, 0)
-    animation.length = 0.8
-    
-    # Add Animation
-    add_anim_to_animator("cane_swing", "tricipher", animation)
-    
-    # Play
-    _animator.play("tricipher")
-    
-func add_anim_to_animator(animation_name: String, library_name: String, animation_resource: Animation):
-    var _animator: AnimationPlayer = self._animator
-    
-    if not is_instance_valid(_animator):
-        return
-    
-    # Get Library
-    var library: AnimationLibrary
-    if _animator.has_animation_library(library_name):
-        library = _animator.get_animation_library(library_name)
-    else:
-        library = AnimationLibrary.new()
-    
-    # Add Animation
-    if not library.has_animation(animation_name):
-        library.add_animation(animation_name, animation_resource)
-    
-    # Return animator library to _animator
-    _animator.add_animation_library(library_name, library)

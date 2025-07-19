@@ -1,4 +1,4 @@
-extends AnimationPlayer
+extends RefCounted
 class_name CreatureMover
 
 enum MoveType { SQUISH, SLIDE, FLOAT }

@@ -80,6 +80,7 @@ var _current_eyeish_tween: Tween # Tweens over eyeish nodes
 ## --- Stored CreatureLogics ---
 var _health_logic: CreatureHealth
 var _action_logic: CreatureMover
+
 # -- AI --
 var _ai_logic: CreatureAI
 var ai_info: Dictionary = {
@@ -222,7 +223,7 @@ func form_and_save_creature(_desc: String = "Standard custom creature."):
     # SaveManager.save_creature(creature_data, creature_type)
 
 ## --- Signal Handlers (The consequences of actions) ---
-# -- Signal Handlers --
+# -- Health --
 func _on_died():
     dead = true # Update flag
     await collapse_scale()
@@ -235,9 +236,11 @@ func _on_died():
     
     if creature_type != "player": queue_free()
     
-func _on_health_updated(current_hp, max_hp, original_hp):
+func _on_health_updated(current_hp, max_hp, _original_hp):
     # Update the visual HP bar
     handle_hp_bar(current_hp, max_hp)
+    
+# -- Blinker --
 
 func _on_blink_start():
     pass
@@ -245,11 +248,13 @@ func _on_blink_start():
 func _on_blink_end():
     pass
     
+# -- Actions --
+    
 func _on_action_finished(_action_name: String):
     pass
     
-# -- Public Methods --
-
+## --- Public Methods ---
+# -- Health --
 func get_hp() -> float:
     return _health_logic.get_hp()
     
@@ -264,13 +269,20 @@ func hit(damage: float = 0.0):
         
     # Play hit sound/animation
     SoundManager.play_one_shot_2d(self, PLOP, 4.5, 0.4, 0.3)
-    
+
+# -- Blinker --
+
 func blink():
     stop_blinking()
     await _blinker_logic.blink()
     
 func stop_blinking():
     _blinker_logic.stop_blinking()
+    
+# -- Actions --
+
+func move(dir: Vector2):
+    _action_logic.move(dir)
     
 func execute_action(action_name: String, parameters: Dictionary = {}, aftermove_delay: float = 0.0):
     _action_logic.execute_action(action_name, parameters, aftermove_delay)

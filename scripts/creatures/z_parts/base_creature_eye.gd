@@ -421,7 +421,6 @@ func blink():
     
     if is_instance_valid(_current_blink_tween) and _current_blink_tween.is_valid():
         _current_blink_tween.kill()
-        _current_blink_tween = null
         
     # Create tween:
     _current_blink_tween = create_tween()

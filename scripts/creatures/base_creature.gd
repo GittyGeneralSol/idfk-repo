@@ -95,6 +95,19 @@ var blinking_info: Dictionary = {
     "max_interval": 4.0
 }
 
+# -- Animation --
+# -- For Premade Additional Animations --
+var secondary_animator: CreatureAnimator
+var tertiary_animator: CreatureAnimator
+var animation_info: Array[Dictionary] = [
+    {
+        "animation": "",
+        "custom_blend": -1,
+        "custom_speed": 1.0,
+        "start_delay": 0.0
+    }
+]
+
 ## --- Ready & Creature Parameters ---
 
 func _ready() -> void:
@@ -129,6 +142,10 @@ func update_from_params(new_params: Dictionary = {}):
     
     # Blinking:
     blinking_info = new_params.get("blinking_info", blinking_info)
+    
+    # Additional Animation:
+    secondary_animator = new_params.get("secondary_animator", get_node("SecondaryAnimator"))
+    tertiary_animator = new_params.get("tertiary_animator", get_node("TertiaryAnimator"))
     
     # Optional Vars:
     if new_params.has("position"):
@@ -174,6 +191,17 @@ func update_logics(new_params: Dictionary = {}):
     _blinker_logic.blink_end.connect(_on_blink_end)
     _blinker_logic.blink_start.connect(_on_blink_start)
     _blinker_logic.start_by_name() # Start Blinking
+    
+    ## -- Animation --
+    var new_animation_info: Array[Dictionary] = new_params.get("animation_info", animation_info)
+    
+    if is_instance_valid(secondary_animator) and new_animation_info.size() >= 1: 
+        secondary_animator._animation_info = new_animation_info[0]
+        secondary_animator.play_by_name()
+    if is_instance_valid(tertiary_animator) and new_animation_info.size() >= 2: 
+        tertiary_animator._animation_info = new_animation_info[1]
+        tertiary_animator.play_by_name()
+    
     
 ## --- Public Custom Setter for Certain Values ---
 

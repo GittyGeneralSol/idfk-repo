@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbs576j0gt3w5"]
+[gd_scene load_steps=11 format=3 uid="uid://cbs576j0gt3w5"]
 
 [ext_resource type="Script" uid="uid://bxlh5pmq1gb6y" path="res://scripts/creatures/tricipher/tricipher.gd" id="1_6eh5a"]
 [ext_resource type="Script" uid="uid://b14ry0ulwobxe" path="res://scripts/creatures/tricipher/body.gd" id="2_mangs"]
@@ -8,12 +8,15 @@
 [ext_resource type="Script" uid="uid://c6yps6vyce81h" path="res://scripts/creatures/tricipher/lashes.gd" id="5_ntjul"]
 [ext_resource type="Script" uid="uid://b14lcurn3ryc4" path="res://scripts/creatures/tricipher/eye_system.gd" id="5_xxa08"]
 [ext_resource type="Script" uid="uid://c6ln5yvrhde7u" path="res://scripts/creatures/tricipher/cane.gd" id="7_e46c4"]
+[ext_resource type="AnimationLibrary" uid="uid://due0yx5i8aplc" path="res://animation_libraries/tricipher.res" id="9_aemsq"]
+[ext_resource type="Script" uid="uid://by8u0e23rrshv" path="res://scripts/creatures/z_parts/logic/CreatureAnimator.gd" id="10_72lvf"]
 
 [node name="Tricipher" type="Node2D"]
+rotation = 2.0119
 script = ExtResource("1_6eh5a")
 
 [node name="body" type="Node2D" parent="."]
-scale = Vector2(1.19975, 1.19975)
+scale = Vector2(1.00094, 1.00094)
 script = ExtResource("2_mangs")
 pulsing = true
 part_properties = {
@@ -108,6 +111,7 @@ part_properties = {
 }
 
 [node name="hat" type="Node2D" parent="body"]
+rotation = 6.28319
 script = ExtResource("4_xxa08")
 part_type = 1
 part_properties = {
@@ -152,7 +156,7 @@ part_properties = {
 }
 
 [node name="eye_system" type="Node2D" parent="."]
-scale = Vector2(1.19975, 1.19975)
+scale = Vector2(1.00094, 1.00094)
 script = ExtResource("5_xxa08")
 part_type = 4
 pulsing = true
@@ -284,5 +288,19 @@ part_properties = {
 [node name="initial_move_trigger" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="SecondaryAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"tricipher": ExtResource("9_aemsq")
+}
+script = ExtResource("10_72lvf")
+metadata/_custom_type_script = "uid://by8u0e23rrshv"
+
+[node name="TertiaryAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"tricipher": ExtResource("9_aemsq")
+}
+script = ExtResource("10_72lvf")
+metadata/_custom_type_script = "uid://by8u0e23rrshv"
 
 [connection signal="timeout" from="initial_move_trigger" to="." method="_on_initial_move_trigger_timeout"]

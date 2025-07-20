@@ -35,7 +35,7 @@ script = ExtResource("5_ebkey")
 rotation_deg = 45.0
 
 [node name="energy_pulse" type="Node2D" parent="body/rot_control/inner"]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.605833, 0.605833)
 script = ExtResource("6_wcn7i")
 rotation_deg = 45.0
 

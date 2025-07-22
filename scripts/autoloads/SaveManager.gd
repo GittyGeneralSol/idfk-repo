@@ -33,6 +33,49 @@ func load_and_instance(scene_name: String, scene_path: String) -> Node:
         return null
 
     return instance
+    
+# Formats a dictionary for saving
+func format_dictionary(dict: Dictionary) -> Dictionary:
+    var formatted_dict: Dictionary
+    for property_name in dict.keys():
+        var value = dict[property_name]
+        value = format_variable(value)
+        formatted_dict[property_name] = value
+    return formatted_dict
+    
+func format_array(arr: Array) -> Array:
+    var formatted_arr: Array
+    formatted_arr.resize(arr.size())
+    for i in range(arr.size()):
+        var value = arr[i]
+        value = format_variable(value)
+        formatted_arr[i] = value
+    return formatted_arr
+    
+func format_variable(value: Variant) -> Variant:
+    var formatted_val: Variant
+    # PERFORM Operations ON DATA BY TYPE
+    if value is Dictionary:
+        formatted_val = format_dictionary(value)
+    elif value is int:
+        formatted_val = value
+    elif value is float:
+        formatted_val = value
+    elif value is Vector2:
+        formatted_val = {"x": value.x, "y": value.y }
+    elif value is Vector3:
+        formatted_val = {"x": value.x, "y": value.y, "z": value.z }
+    elif value is Vector4:
+        formatted_val = {"x": value.x, "y": value.y, "z": value.z, "w": value.w }
+    elif value is Color:
+        formatted_val = {"r": value.r, "g": value.g, "b": value.b, "a": value.a }
+    elif value is String:
+        formatted_val = value
+    elif value is Array:
+        formatted_val = format_array(value)
+    else:
+        formatted_val = var_to_str(value)
+    return formatted_val
 
 ## -- General --
 
@@ -215,12 +258,12 @@ func _formulate_creature_data(creature: BaseCreature, desc: String = "Standard c
     }
     
     ## Logic
-    var logic_data: Dictionary = creature.get_logic_data()
+    var logic_data: Dictionary = format_dictionary(creature.get_logic_data())
     creature_data["logic"] = logic_data
     
     ## Parts
     var parts_data: Dictionary
-    var parts = creature.child_parts
+    var parts = creature.get_child_parts()
     
     for part: BaseCreaturePart in parts:
         parts_data[part.name] = part.part_properties

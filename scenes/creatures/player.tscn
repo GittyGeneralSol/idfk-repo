@@ -146,13 +146,3 @@ part_properties = {
 "pulsing": false,
 "spinning": false
 }
-
-[node name="Blink_trigger" type="Timer" parent="."]
-wait_time = 4.0
-autostart = true
-
-[node name="move_cooldown" type="Timer" parent="."]
-wait_time = 0.2
-
-[connection signal="timeout" from="Blink_trigger" to="." method="_on_blink_trigger_timeout"]
-[connection signal="timeout" from="move_cooldown" to="." method="_on_move_cooldown_timeout"]

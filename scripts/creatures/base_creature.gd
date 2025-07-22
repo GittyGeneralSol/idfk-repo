@@ -258,12 +258,12 @@ func get_body() -> BaseCreatureMainBody:
     return body
 
     
-func form_and_save_creature(_desc: String = "Standard custom creature."):
+func form_and_save_creature(desc: String = "Standard custom creature."):
     if Engine.is_editor_hint() or !self.is_node_ready():
         return
     
-    # var creature_data = SaveManager._formulate_creature_data(self, desc) 
-    # SaveManager.save_creature(creature_data, creature_type)
+    var creature_data = SaveManager._formulate_creature_data(self, desc) 
+    SaveManager.save_creature(creature_data, creature_type)
 
 ## --- Signal Handlers (The consequences of actions) ---
 # -- Health --

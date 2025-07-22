@@ -19,8 +19,6 @@ func _ready() -> void:
     
     ## Since this is starter world, it will have to ready itself.
     world_readied = true
-    
-    print("_loaded_scenes: ", _loaded_scenes)
 
 func create_boundary():
     

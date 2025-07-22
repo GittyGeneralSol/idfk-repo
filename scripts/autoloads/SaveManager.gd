@@ -4,15 +4,35 @@ extends Node
 const SAVES_DIRECTORY = "user://saves/"
 const PERSISTANT_DIRECTORY = "user://persistant/"
 
-## -- Creatures --
-const CIRANGLE = preload("res://scenes/creatures/cirangle.tscn")
-const DELTSQU = preload("res://scenes/creatures/deltsqu.tscn")
-const HEXHUGE = preload("res://scenes/creatures/hexhuge.tscn")
-const PENTCIRC = preload("res://scenes/creatures/pentcirc.tscn")
-const PLAYER = preload("res://scenes/creatures/player.tscn")
-const SQUSQU = preload("res://scenes/creatures/squsqu.tscn")
-const TRICIRC = preload("res://scenes/creatures/tricirc.tscn")
-const TRISTAR = preload("res://scenes/creatures/tristar.tscn")
+# --- Loaded Scenes ---
+# Reuse already loaded scenes, no need to reload
+var _loaded_scenes: Dictionary = {}
+
+## -- Superb Utility --
+func load_and_instance(scene_name: String, scene_path: String) -> Node:
+    var scene: PackedScene
+
+    # Get the PackedScene
+    if _loaded_scenes.has(scene_name):
+        scene = _loaded_scenes[scene_name]
+    else:
+        scene = load(scene_path)
+        if scene != null:
+            _loaded_scenes[scene_name] = scene # 'scene_name' is the key to access this scene later on
+
+    # Handle failure
+    if not is_instance_valid(scene):
+        printerr("SAVEMANAGER ERROR: FAILED to load PackedScene with path '", scene_path, "'. Given scene_name: ", scene_name)
+        return null
+
+    # Instantiate and return
+    var instance = scene.instantiate()
+    
+    if not is_instance_valid(instance):
+        printerr("SAVEMANAGER ERROR: FAILED to instantiate scene with path '", scene_path, "'. Given scene_name: ", scene_name)
+        return null
+
+    return instance
 
 ## -- General --
 
@@ -190,12 +210,15 @@ func _formulate_creature_data(creature: BaseCreature, desc: String = "Standard c
     
     var creature_data: Dictionary = {
         "description": desc,
-        "logic_scripts": {
-            "logic_file_1": "logic/example_logic_1.json",
-            "logic_file_2": "logic/example_logic_2.json" 
-        }
+        "logic": {},
+        "parts": {}
     }
     
+    ## Logic
+    var logic_data: Dictionary = creature.get_logic_data()
+    creature_data["logic"] = logic_data
+    
+    ## Parts
     var parts_data: Dictionary
     var parts = creature.child_parts
     
@@ -401,21 +424,9 @@ func handle_creature_entry(entry, parent_world: Node):
     
     if not parent_world:
         return # Do not spawn if parent world is nonexistent
-        
-    var creature
-    match(creature_type):
-        "deltsqu":
-            creature = DELTSQU.instantiate()
-        "hexhuge":
-            creature = HEXHUGE.instantiate()
-        "pentcirc":
-            creature = PENTCIRC.instantiate()
-        "squsqu":
-            creature = SQUSQU.instantiate()
-        "tricirc":
-            creature = TRICIRC.instantiate()
-        "tristar":
-            creature = TRISTAR.instantiate()
+    
+    var res_path = "res://scenes/creatures/" + creature_type + ".tscn"
+    var creature = load_and_instance(creature_type, res_path)
             
     parent_world.add_child(creature)
     creature.c_setup_variables(creature_type, max_hp, hp)

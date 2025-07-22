@@ -38,26 +38,6 @@ var params: Dictionary:
 # --- General Data ---
 var creature_type: String = "unspecified"
             
-# --- Collision and Movement Data ---
-var collision_info: Dictionary = {
-    "hitbox_gridsize": Vector2.ONE,
-    "hitbox_radius":  70, # For bullets
-    "primary_movement": Vector4(20, 20, 20, 20),
-    "secondary_movement": Vector4(10, 10, 10, 10),
-    "x_squish_factor": 1.25,
-    "y_squish_factor": 1.25
-}
-
-var movement_info: Dictionary = {
-    "move_type": CreatureMover.MoveType.SQUISH,
-    "move_step": Constants.tile_size,
-    "move_time": 0.2,
-    "aftermove_delay": 0.2,
-    "eye_movement": 7,
-    "x_squish_factor": 1.25,
-    "y_squish_factor": 1.25
-}
-            
 ## --- Child Parts ---
 var body_node: BaseCreatureMainBody
 var eyeish_nodes: Array[BaseCreaturePart]
@@ -78,18 +58,43 @@ var _current_move_tween: Tween
 var _current_eyeish_tween: Tween # Tweens over eyeish nodes
 
 ## --- Stored CreatureLogics ---
+# -- Health --
 var _health_logic: CreatureHealth
+var _health_info: Dictionary = {
+    "initial_hp": 100,
+    "max_hp": 100
+}
+
+# -- Blocking Actions / Movement --
 var _action_logic: CreatureMover
+var _movement_info: Dictionary = {
+    "move_type": CreatureMover.MoveType.SQUISH,
+    "move_step": Constants.tile_size,
+    "move_time": 0.2,
+    "aftermove_delay": 0.2,
+    "eye_movement": 7,
+    "x_squish_factor": 1.25,
+    "y_squish_factor": 1.25
+}
+
+var _collision_info: Dictionary = {
+    "hitbox_gridsize": Vector2.ONE,
+    "hitbox_radius":  70, # For bullets
+    "primary_movement": Vector4(20, 20, 20, 20),
+    "secondary_movement": Vector4(10, 10, 10, 10),
+    "x_squish_factor": 1.25,
+    "y_squish_factor": 1.25
+}
 
 # -- AI --
 var _ai_logic: CreatureAI
-var ai_info: Dictionary = {
+var _ai_info: Dictionary = {
     "behavior_loop": "pathfinding"
 }
 
 # -- Blinking --
 var _blinker_logic: CreatureBlinker
-var blinking_info: Dictionary = {
+var _blinking_info: Dictionary = {
     "blink_loop": "ranged",
     "min_interval": 3.0,
     "max_interval": 4.0
@@ -99,7 +104,7 @@ var blinking_info: Dictionary = {
 # -- For Premade Additional Animations --
 var secondary_animator: CreatureAnimator
 var tertiary_animator: CreatureAnimator
-var animation_info: Array[Dictionary] = [
+var _animation_info: Array[Dictionary] = [
     {
         "animation": "",
         "custom_blend": -1,
@@ -134,14 +139,14 @@ func update_from_params(new_params: Dictionary = {}):
     allow_moving = new_params.get("allow_moving", allow_moving)
     
     # AI:
-    ai_info = new_params.get("ai_info", ai_info)
+    _ai_info = new_params.get("ai_info", _ai_info)
     
     # Collision & Movement:
-    collision_info = new_params.get("collision_info", collision_info)
-    movement_info = new_params.get("movement_info", movement_info)
+    _collision_info = new_params.get("collision_info", _collision_info)
+    _movement_info = new_params.get("movement_info", _movement_info)
     
     # Blinking:
-    blinking_info = new_params.get("blinking_info", blinking_info)
+    _blinking_info = new_params.get("blinking_info", _blinking_info)
     
     # Additional Animation:
     secondary_animator = new_params.get("secondary_animator", get_node("SecondaryAnimator"))
@@ -172,18 +177,18 @@ func update_logics(new_params: Dictionary = {}):
     
     ## -- Action --
     if not is_instance_valid(_action_logic):
-        _action_logic = CreatureMover.new(self, movement_info)
+        _action_logic = CreatureMover.new(self, _movement_info)
         
     _action_logic.action_finished.connect(_on_action_finished)
     
     ## -- AI --
     if not is_instance_valid(_ai_logic):
-        _ai_logic = CreatureAI.new(self, _action_logic, ai_info)
+        _ai_logic = CreatureAI.new(self, _action_logic, _ai_info)
         
     _ai_logic.start_by_name() # Start behavior loop
     
     ## -- Blinking --
-    var new_blinking_info = new_params.get("blinking_info", blinking_info)
+    var new_blinking_info = new_params.get("blinking_info", _blinking_info)
     
     if not is_instance_valid(_blinker_logic):
         _blinker_logic = CreatureBlinker.new(self, new_blinking_info)
@@ -193,7 +198,7 @@ func update_logics(new_params: Dictionary = {}):
     _blinker_logic.start_by_name() # Start Blinking
     
     ## -- Animation --
-    var new_animation_info: Array[Dictionary] = new_params.get("animation_info", animation_info)
+    var new_animation_info: Array[Dictionary] = new_params.get("animation_info", _animation_info)
     
     if is_instance_valid(secondary_animator) and new_animation_info.size() >= 1: 
         secondary_animator._animation_info = new_animation_info[0]
@@ -201,7 +206,17 @@ func update_logics(new_params: Dictionary = {}):
     if is_instance_valid(tertiary_animator) and new_animation_info.size() >= 2: 
         tertiary_animator._animation_info = new_animation_info[1]
         tertiary_animator.play_by_name()
-    
+        
+func get_logic_data() -> Dictionary:
+    var logic_data: Dictionary = {
+        "health_info": _health_info,
+        "ai_info": _ai_info,
+        "movement_info": _movement_info,
+        "collision_info": _collision_info,
+        "blinking_info": _blinking_info,
+        "animation_info": _animation_info
+    }
+    return logic_data
     
 ## --- Public Custom Setter for Certain Values ---
 
@@ -318,7 +333,7 @@ func execute_action(action_name: String, parameters: Dictionary = {}, aftermove_
 ## --- Utility ---
         
 func check_pos_for_collision(dir: Vector2) -> bool:
-    var hitbox_gridsize = collision_info.get("hitbox_gridsize", Vector2.ONE)
+    var hitbox_gridsize = _collision_info.get("hitbox_gridsize", Vector2.ONE)
     if hitbox_gridsize != Vector2.ONE:
         return check_rectangular_area_for_collision(dir, hitbox_gridsize)
     

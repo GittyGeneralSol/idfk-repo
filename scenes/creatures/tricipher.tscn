@@ -12,11 +12,11 @@
 [ext_resource type="Script" uid="uid://by8u0e23rrshv" path="res://scripts/creatures/z_parts/logic/CreatureAnimator.gd" id="10_72lvf"]
 
 [node name="Tricipher" type="Node2D"]
-rotation = 2.0119
+rotation = 3.38197
 script = ExtResource("1_6eh5a")
 
 [node name="body" type="Node2D" parent="."]
-scale = Vector2(1.00094, 1.00094)
+scale = Vector2(1.11495, 1.11495)
 script = ExtResource("2_mangs")
 pulsing = true
 part_properties = {
@@ -111,7 +111,7 @@ part_properties = {
 }
 
 [node name="hat" type="Node2D" parent="body"]
-rotation = 6.28319
+rotation = 2.40697
 script = ExtResource("4_xxa08")
 part_type = 1
 part_properties = {
@@ -149,14 +149,14 @@ part_properties = {
 "x": 0.0,
 "y": 0.0
 },
-"part_rotation": 0.0,
+"part_rotation": 360.0,
 "part_type": "DECO",
 "pulsing": false,
 "spinning": false
 }
 
 [node name="eye_system" type="Node2D" parent="."]
-scale = Vector2(1.00094, 1.00094)
+scale = Vector2(1.11495, 1.11495)
 script = ExtResource("5_xxa08")
 part_type = 4
 pulsing = true

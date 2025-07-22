@@ -17,17 +17,6 @@ class_name World
 @export var bg_color: Color = Color.DIM_GRAY - Color(0.2, 0.2, 0.2, 0.0)
 @onready var bg_size = world_size * Constants.tile_size + Vector2(Constants.tile_size, Constants.tile_size)
 
-# --- Loaded Scenes ---
-# Reuse already loaded scenes, no need to reload
-var _loaded_scenes: Dictionary = {}
-
-## Objects:
-const STARPOUCH = preload("res://scenes/objects/starpouch.tscn")
-
-## Turrets:
-const SHIELD = preload("res://scenes/turrets/shield.tscn")
-const X_SHOOTER = preload("res://scenes/turrets/x_shooter.tscn")
-
 ## Misc:
 const SELECTOR = preload("res://scenes/utility/selector.tscn")
 
@@ -72,7 +61,7 @@ func create_block(grid_pos: Vector2, block_name: String, argument_dict: Dictiona
     
     # Instantiate the block scene:    
     var scene_path = "res://scenes/blocks/" + block_name + ".tscn"
-    block = load_and_instance(block_name, scene_path)
+    block = SaveManager.load_and_instance(block_name, scene_path)
     
     if not block:
         printerr("WORLD_CLASS - Instatiated block invalid. Block_name: ", block_name)
@@ -109,7 +98,7 @@ func create_creature(grid_pos: Vector2, creature_type: String, argument_dict: Di
     
     # Instantiate the creature scene:    
     var scene_path = "res://scenes/creatures/" + creature_type + ".tscn"
-    creature = load_and_instance(creature_type, scene_path)
+    creature = SaveManager.load_and_instance(creature_type, scene_path)
     
     if not creature:
         printerr("WORLD_CLASS - Instatiated creature invalid. Creature_type: ", creature_type)
@@ -137,32 +126,6 @@ func create_creature(grid_pos: Vector2, creature_type: String, argument_dict: Di
     
     # Return
     return creature
-    
-func load_and_instance(scene_name: String, scene_path: String) -> Node:
-    var scene: PackedScene
-
-    # Get the PackedScene
-    if _loaded_scenes.has(scene_name):
-        scene = _loaded_scenes[scene_name]
-    else:
-        scene = load(scene_path)
-        if scene != null:
-            _loaded_scenes[scene_name] = scene # 'scene_name' is the key to access this scene later on
-
-    # Handle failure
-    if not is_instance_valid(scene):
-        printerr("WORLD_CLASS ERROR: FAILED to load PackedScene with path '", scene_path, "'. Given scene_name: ", scene_name)
-        return null
-
-    # Instantiate and return
-    var instance = scene.instantiate()
-    
-    if not is_instance_valid(instance):
-        printerr("WORLD_CLASS ERROR: FAILED to instantiate scene with path '", scene_path, "'. Given scene_name: ", scene_name)
-        return null
-
-    return instance
-
     
 func remove_block(grid_pos: Vector2) -> String:
     if not current_tile_map.has(grid_pos):
@@ -211,7 +174,7 @@ func update_surrounding_blocks(grid_pos: Vector2) -> Array[Block]:
     
 func create_marker(target_pos: Vector2i):
     var target_pos_p = target_pos * Constants.tile_size
-    var marker = load_and_instance("cirangle", "res://scenes/creatures/cirangle.tscn")
+    var marker = SaveManager.load_and_instance("cirangle", "res://scenes/creatures/cirangle.tscn")
     marker.dead = true
     marker.is_frozen = true
     marker.process_mode = Node.PROCESS_MODE_DISABLED

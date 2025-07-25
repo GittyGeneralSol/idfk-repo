@@ -16,7 +16,7 @@ rotation = 3.38197
 script = ExtResource("1_6eh5a")
 
 [node name="body" type="Node2D" parent="."]
-scale = Vector2(1.11495, 1.11495)
+scale = Vector2(1.10408, 1.10408)
 script = ExtResource("2_mangs")
 pulsing = true
 part_properties = {
@@ -111,7 +111,7 @@ part_properties = {
 }
 
 [node name="hat" type="Node2D" parent="body"]
-rotation = 2.40697
+rotation = -0.0628467
 script = ExtResource("4_xxa08")
 part_type = 1
 part_properties = {
@@ -156,7 +156,7 @@ part_properties = {
 }
 
 [node name="eye_system" type="Node2D" parent="."]
-scale = Vector2(1.11495, 1.11495)
+scale = Vector2(1.10408, 1.10408)
 script = ExtResource("5_xxa08")
 part_type = 4
 pulsing = true
@@ -289,14 +289,14 @@ part_properties = {
 one_shot = true
 autostart = true
 
-[node name="SecondaryAnimator" type="AnimationPlayer" parent="."]
+[node name="0-Animator" type="AnimationPlayer" parent="."]
 libraries = {
 &"tricipher": ExtResource("9_aemsq")
 }
 script = ExtResource("10_72lvf")
 metadata/_custom_type_script = "uid://by8u0e23rrshv"
 
-[node name="TertiaryAnimator" type="AnimationPlayer" parent="."]
+[node name="1-Animator" type="AnimationPlayer" parent="."]
 libraries = {
 &"tricipher": ExtResource("9_aemsq")
 }

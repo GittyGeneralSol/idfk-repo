@@ -102,8 +102,7 @@ var _blinking_info: Dictionary = {
 
 # -- Animation --
 # -- For Premade Additional Animations --
-var secondary_animator: CreatureAnimator
-var tertiary_animator: CreatureAnimator
+var anim_players: Dictionary[String, CreatureAnimator]
 var _animation_info: Array[Dictionary] = [
     {
         "animation": "",
@@ -149,8 +148,15 @@ func update_from_params(new_params: Dictionary = {}):
     _blinking_info = new_params.get("blinking_info", _blinking_info)
     
     # Additional Animation:
-    secondary_animator = new_params.get("secondary_animator", get_node("SecondaryAnimator"))
-    tertiary_animator = new_params.get("tertiary_animator", get_node("TertiaryAnimator"))
+    var new_animation_info: Array[Dictionary] = new_params.get("animation_info", _animation_info)
+    for i in range(new_animation_info.size()):
+        var entry = new_animation_info[i]
+        var player_name = entry.get("player", str(i) + "-Animator")
+        var player_node = get_node(player_name)
+        if is_instance_valid(player_node):
+            anim_players[player_name] = player_node
+            
+    print(creature_type.capitalize() + " Anim_players: ", anim_players)
     
     # Optional Vars:
     if new_params.has("position"):
@@ -200,12 +206,13 @@ func update_logics(new_params: Dictionary = {}):
     ## -- Animation --
     var new_animation_info: Array[Dictionary] = new_params.get("animation_info", _animation_info)
     
-    if is_instance_valid(secondary_animator) and new_animation_info.size() >= 1: 
-        secondary_animator._animation_info = new_animation_info[0]
-        secondary_animator.play_by_name()
-    if is_instance_valid(tertiary_animator) and new_animation_info.size() >= 2: 
-        tertiary_animator._animation_info = new_animation_info[1]
-        tertiary_animator.play_by_name()
+    var keys = anim_players.keys()
+    for i in range(keys.size()):
+        var player_name: String = keys[i]
+        var player_node: CreatureAnimator = anim_players.get(player_name, null)
+        if is_instance_valid(player_node):
+            player_node._animation_info = new_animation_info[i]
+            player_node.play_by_name()
         
 func get_logic_data() -> Dictionary:
     var logic_data: Dictionary = {

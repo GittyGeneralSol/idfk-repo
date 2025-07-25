@@ -16,7 +16,7 @@ rotation = 3.38197
 script = ExtResource("1_6eh5a")
 
 [node name="body" type="Node2D" parent="."]
-scale = Vector2(1.10408, 1.10408)
+scale = Vector2(1.00232, 1.00232)
 script = ExtResource("2_mangs")
 pulsing = true
 part_properties = {
@@ -149,14 +149,14 @@ part_properties = {
 "x": 0.0,
 "y": 0.0
 },
-"part_rotation": 137.909,
+"part_rotation": -3.60085,
 "part_type": "DECO",
 "pulsing": false,
 "spinning": false
 }
 
 [node name="eye_system" type="Node2D" parent="."]
-scale = Vector2(1.10408, 1.10408)
+scale = Vector2(1.00232, 1.00232)
 script = ExtResource("5_xxa08")
 part_type = 4
 pulsing = true

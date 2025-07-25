@@ -54,27 +54,20 @@ func format_array(arr: Array) -> Array:
     
 func format_variable(value: Variant) -> Variant:
     var formatted_val: Variant
+    
     # PERFORM Operations ON DATA BY TYPE
-    if value is Dictionary:
-        formatted_val = format_dictionary(value)
-    elif value is int:
-        formatted_val = value
-    elif value is float:
-        formatted_val = value
-    elif value is Vector2:
-        formatted_val = {"x": value.x, "y": value.y }
-    elif value is Vector3:
-        formatted_val = {"x": value.x, "y": value.y, "z": value.z }
-    elif value is Vector4:
-        formatted_val = {"x": value.x, "y": value.y, "z": value.z, "w": value.w }
-    elif value is Color:
-        formatted_val = {"r": value.r, "g": value.g, "b": value.b, "a": value.a }
-    elif value is String:
-        formatted_val = value
-    elif value is Array:
-        formatted_val = format_array(value)
-    else:
-        formatted_val = var_to_str(value)
+    match(typeof(value)):
+        TYPE_DICTIONARY: formatted_val = format_dictionary(value)
+        TYPE_INT:        formatted_val = value
+        TYPE_FLOAT:      formatted_val = value
+        TYPE_VECTOR2:    formatted_val = {"x": value.x, "y": value.y }
+        TYPE_VECTOR3:    formatted_val = {"x": value.x, "y": value.y, "z": value.z }
+        TYPE_VECTOR4:    formatted_val = {"x": value.x, "y": value.y, "z": value.z, "w": value.w }
+        TYPE_COLOR:      formatted_val = {"r": value.r, "g": value.g, "b": value.b, "a": value.a }
+        TYPE_STRING:     formatted_val = value
+        TYPE_ARRAY:      formatted_val = format_array(value)
+        _:               formatted_val = var_to_str(value)
+        
     return formatted_val
 
 ## -- General --

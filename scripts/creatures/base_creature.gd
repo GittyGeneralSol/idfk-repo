@@ -183,7 +183,7 @@ func update_logics(new_params: Dictionary = {}):
     
     ## -- Action --
     if not is_instance_valid(_action_logic):
-        _action_logic = CreatureMover.new(self, _movement_info)
+        _action_logic = CreatureMover.new(self, _movement_info, _collision_info)
         
     _action_logic.action_finished.connect(_on_action_finished)
     

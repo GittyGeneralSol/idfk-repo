@@ -5,14 +5,16 @@ enum MoveType { SQUISH, SLIDE, FLOAT }
 
 signal action_finished(action_name: String)
 
-var _movement_info: Dictionary # Main Data Object
+var _movement_info: Dictionary # Main Data Object # 1
+var _collision_info: Dictionary # Main Data Object # 2
 var _owner: Node2D # A reference to the BaseCreature node
 var _current_action: String = ""
 
 # The constructor takes the node it's supposed to control.
-func _init(owner_node: Node2D, new_movement_info = {}):
+func _init(owner_node: Node2D, new_movement_info = {}, new_collision_info = {}):
     _owner = owner_node
     _movement_info = new_movement_info
+    _collision_info = new_collision_info
     
 func no_action() -> bool:
     if _current_action == "":
@@ -209,7 +211,7 @@ func _animate_bump(direction: Vector2, time_to_move: float):
         return
     
     ## Get collision info from owner
-    var col_info = _owner.collision_info
+    var col_info = _collision_info
     
     var primary_movement: Vector4 = col_info.get("primary_movement", Vector4(20, 20, 20, 20))
     var _secondary_movement: Vector4 = col_info.get("secondary_movement", Vector4(10, 10, 10, 10))

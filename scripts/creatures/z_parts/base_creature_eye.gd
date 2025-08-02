@@ -179,8 +179,8 @@ func setup_eye_properties():
     # Create the eyelid properties dictionary
     var eyelid_params: Dictionary = {
         "lid_type": _lid_type_names.get(lid_type, "UNKNOWN"),
-        "eyelid_color_top": get_value_componentized(eyelid_color_top),
-        "eyelid_color_bottom": get_value_componentized(eyelid_color_bottom)
+        "eyelid_color_top": eyelid_color_top,
+        "eyelid_color_bottom": eyelid_color_bottom
     }
     
     # Clean unnesscary props:
@@ -195,7 +195,7 @@ func setup_eye_properties():
     temp_params.erase("eye_type")
     temp_params.erase("blink_type")
     
-    eye_properties.merge(save_props_by_type(temp_params, eye_properties))
+    eye_properties.merge(temp_params)
     
     eye_properties["eyelid_props"] = eyelid_params
     part_properties["eye_properties"] = eye_properties
@@ -390,25 +390,6 @@ func _get_enum_names(enum_dict: Dictionary) -> Dictionary:
         var value = enum_dict[key]
         names[value] = key
     return names
-    
-# For saving data by type
-func save_props_by_type(source_dict: Dictionary, target_dict: Dictionary) -> Dictionary:
-    # Loop through each property
-    for prop in source_dict.keys():
-        var val = source_dict.get(prop)
-        val = get_value_componentized(val)
-        target_dict[prop] = val
-        
-    return target_dict
-            
-func get_value_componentized(value: Variant) -> Variant:
-    var val = value
-    if val is Vector2:
-        return { "x": val.x, "y": val.y }
-    elif val is Color:
-        return { "r": val.r, "g": val.g, "b": val.b, "a": val.a }
-    else:
-        return val
 
 ## --- Animation ---
  

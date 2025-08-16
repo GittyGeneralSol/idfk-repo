@@ -306,19 +306,26 @@ func _on_action_finished(_action_name: String):
 ## --- Public Methods ---
 # -- Health --
 func get_hp() -> float:
-    return _health_logic.get_hp()
+    if is_instance_valid(_health_logic) and _health_logic is CreatureHealth:
+        return _health_logic.get_hp()
+    return INF
     
 func get_max_hp() -> float:
-    return _health_logic.get_max_hp()    
+    if is_instance_valid(_health_logic) and _health_logic is CreatureHealth:
+        return _health_logic.get_max_hp()
+    return INF
 
-func hit(damage: float = 0.0):
-    _health_logic.take_damage(damage) # Example damage
+func hit(damage: float = 0.0) -> bool:
+    if not is_instance_valid(_health_logic) or _health_logic is not CreatureHealth:
+        return false
+    
+    _health_logic.take_damage(damage)
     
     if WorldUtils.is_in_player_world(self):
-        return
-        
-    # Play hit sound/animation
-    SoundManager.play_one_shot_2d(self, PLOP, 4.5, 0.4, 0.3)
+        # Play hit sound/animation if in player world
+        SoundManager.play_one_shot_2d(self, PLOP, 4.5, 0.4, 0.3)
+        return true
+    return true
 
 # -- Blinker --
 

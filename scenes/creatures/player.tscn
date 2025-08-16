@@ -62,30 +62,12 @@ part_properties = {
 "eye_properties": {
 "blink_type": "OPENNESS",
 "draw_outline": false,
-"eye_color": {
-"a": 1.0,
-"b": 1.0,
-"g": 1.0,
-"r": 1.0
-},
-"eye_size": {
-"x": 50.0,
-"y": 50.0
-},
+"eye_color": Color(1, 1, 1, 1),
+"eye_size": Vector2(50, 50),
 "eye_type": "RECTANGLE",
 "eyelid_props": {
-"eyelid_color_bottom": {
-"a": 1.0,
-"b": 0.745098,
-"g": 0.745098,
-"r": 0.745098
-},
-"eyelid_color_top": {
-"a": 1.0,
-"b": 0.745098,
-"g": 0.745098,
-"r": 0.745098
-},
+"eyelid_color_bottom": Color(0.745098, 0.745098, 0.745098, 1),
+"eyelid_color_top": Color(0.745098, 0.745098, 0.745098, 1),
 "lid_type": "TWOLID"
 }
 },
@@ -109,30 +91,12 @@ part_properties = {
 "eye_properties": {
 "blink_type": "OPENNESS",
 "draw_outline": false,
-"eye_color": {
-"a": 1.0,
-"b": 1.0,
-"g": 1.0,
-"r": 1.0
-},
-"eye_size": {
-"x": 50.0,
-"y": 50.0
-},
+"eye_color": Color(1, 1, 1, 1),
+"eye_size": Vector2(50, 50),
 "eye_type": "RECTANGLE",
 "eyelid_props": {
-"eyelid_color_bottom": {
-"a": 1.0,
-"b": 0.745098,
-"g": 0.745098,
-"r": 0.745098
-},
-"eyelid_color_top": {
-"a": 1.0,
-"b": 0.745098,
-"g": 0.745098,
-"r": 0.745098
-},
+"eyelid_color_bottom": Color(0.745098, 0.745098, 0.745098, 1),
+"eyelid_color_top": Color(0.745098, 0.745098, 0.745098, 1),
 "lid_type": "TWOLID"
 }
 },

@@ -88,26 +88,11 @@ part_type = 2
 part_properties = {
 "eye_properties": {
 "blink_type": "OPENNESS",
-"eye_color": {
-"a": 1.0,
-"b": 0.949804,
-"g": 1.0,
-"r": 0.9
-},
+"eye_color": Color(0.9, 1, 0.949804, 1),
 "eye_type": "DIAMOND",
 "eyelid_props": {
-"eyelid_color_bottom": {
-"a": 1.0,
-"b": 0.398431,
-"g": 0.8,
-"r": 0.0
-},
-"eyelid_color_top": {
-"a": 1.0,
-"b": 0.398431,
-"g": 0.8,
-"r": 0.0
-},
+"eyelid_color_bottom": Color(0, 0.8, 0.398431, 1),
+"eyelid_color_top": Color(0, 0.8, 0.398431, 1),
 "lid_type": "TWOLID"
 },
 "height": 25.0,

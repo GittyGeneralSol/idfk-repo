@@ -109,26 +109,11 @@ part_properties = {
 "eye_properties": {
 "blink_type": "OPENNESS",
 "draw_outline": false,
-"eye_color": {
-"a": 1.0,
-"b": 1.0,
-"g": 1.0,
-"r": 1.0
-},
+"eye_color": Color(1, 1, 1, 1),
 "eye_type": "CIRCLE",
 "eyelid_props": {
-"eyelid_color_bottom": {
-"a": 1.0,
-"b": 0.0,
-"g": 1.0,
-"r": 1.0
-},
-"eyelid_color_top": {
-"a": 1.0,
-"b": 0.0,
-"g": 1.0,
-"r": 1.0
-},
+"eyelid_color_bottom": Color(1, 1, 0, 1),
+"eyelid_color_top": Color(1, 1, 0, 1),
 "lid_type": "TWOLID"
 },
 "radius": 25

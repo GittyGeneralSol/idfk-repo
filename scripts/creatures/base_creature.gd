@@ -324,7 +324,6 @@ func hit(damage: float = 0.0) -> bool:
     if WorldUtils.is_in_player_world(self):
         # Play hit sound/animation if in player world
         SoundManager.play_one_shot_2d(self, PLOP, 4.5, 0.4, 0.3)
-        return true
     return true
 
 # -- Blinker --

@@ -1,4 +1,4 @@
-extends GDScript
+extends RefCounted
 class_name CustomSerializer
 
 # --- Serialization of Data ---

@@ -54,8 +54,7 @@ static func _formulate_raw_symbol_points(symbol: String) -> PackedVector2Array:
         if not symbol_data:
             return []
         
-        var temp_string = symbol_data.get("symbol_points", []) as String
-        shape_points = str_to_var(temp_string)
+        shape_points = CustomSerializer.deserialize_variable(symbol_data.get("symbol_points", []))
         return shape_points as PackedVector2Array
     
     # Get data  

@@ -23,7 +23,9 @@ func _ready() -> void:
         "yo": "no",
         "car_color": Color.AQUA,
         "KILL?": false,
-        "size": Vector2(5, 25)
+        "size": Vector2(5, 25),
+        "size_3d": Vector3(5, 25, 125),
+        "collection_of_points": PackedVector2Array([Vector2(0, 0), Vector2(1, 1), Vector2(3, 4)])
     }
     
     SaveManager.save_data_to_file(data, "TEST_FILE", "osama/bin/test_path/")

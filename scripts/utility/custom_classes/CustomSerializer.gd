@@ -22,7 +22,7 @@ static func serialize_array(arr: Array) -> Array:
 static func serialize_color(col: Color) -> String:
     var formatted_col: String
     
-    if col.a != 1.0:
+    if col.a == 1.0:
         formatted_col = "#" + col.to_html(false)
         return formatted_col
         

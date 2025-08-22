@@ -18,6 +18,15 @@ func _ready() -> void:
     load_saved_player()
     WorldUtils.set_current_player_world(self)
     form_and_save_creature("The player. Polygon master. The grey square blob. Just an imitation of something else..")
+    
+    var data = {
+        "yo": "no",
+        "car_color": Color.AQUA,
+        "KILL?": false,
+        "size": Vector2(5, 25)
+    }
+    
+    SaveManager.save_data_to_file(data, "TEST_FILE", "osama/bin/test_path/")
 
 func set_player_params():
     var new_blinking_info: Dictionary = {

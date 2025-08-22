@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://c6yps6vyce81h" path="res://scripts/creatures/tricipher/lashes.gd" id="5_ntjul"]
 [ext_resource type="Script" uid="uid://b14lcurn3ryc4" path="res://scripts/creatures/tricipher/eye_system.gd" id="5_xxa08"]
 [ext_resource type="Script" uid="uid://c6ln5yvrhde7u" path="res://scripts/creatures/tricipher/cane.gd" id="7_e46c4"]
-[ext_resource type="AnimationLibrary" uid="uid://due0yx5i8aplc" path="res://animation_libraries/tricipher.res" id="9_aemsq"]
+[ext_resource type="AnimationLibrary" uid="uid://due0yx5i8aplc" path="res://assets/animation_libraries/tricipher.res" id="9_aemsq"]
 [ext_resource type="Script" uid="uid://by8u0e23rrshv" path="res://scripts/creatures/z_parts/logic/CreatureAnimator.gd" id="10_72lvf"]
 
 [node name="Tricipher" type="Node2D"]

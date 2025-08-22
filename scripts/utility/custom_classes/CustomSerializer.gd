@@ -43,6 +43,7 @@ static func serialize_variable(value: Variant) -> Variant:
         TYPE_COLOR:       formatted_val = serialize_color(value)
         TYPE_STRING:      formatted_val = value
         TYPE_STRING_NAME: formatted_val = value as String
+        TYPE_BOOL:        formatted_val = value
         TYPE_ARRAY:       formatted_val = serialize_array(value)
         TYPE_PACKED_VECTOR2_ARRAY: formatted_val = serialize_array(value)
         TYPE_PACKED_STRING_ARRAY:  formatted_val = serialize_array(value)
@@ -56,18 +57,20 @@ static func deserialize_variable(value: Variant) -> Variant:
     
     # PERFORM Operations ON DATA BY TYPE
     match(typeof(value)):
-        TYPE_DICTIONARY: deserialized_val = deserialize_dictionary(value)
-        TYPE_INT:        deserialized_val = value
-        TYPE_FLOAT:      deserialized_val = value
-        TYPE_VECTOR2:    deserialized_val = value
-        TYPE_VECTOR3:    deserialized_val = value
-        TYPE_VECTOR4:    deserialized_val = value
-        TYPE_COLOR:      deserialized_val = value
-        TYPE_STRING:     deserialized_val = deserialize_string(value)
-        TYPE_ARRAY:      deserialized_val = deserialize_array(value)
+        TYPE_DICTIONARY:  deserialized_val = deserialize_dictionary(value)
+        TYPE_INT:         deserialized_val = value
+        TYPE_FLOAT:       deserialized_val = value
+        TYPE_VECTOR2:     deserialized_val = value
+        TYPE_VECTOR3:     deserialized_val = value
+        TYPE_VECTOR4:     deserialized_val = value
+        TYPE_COLOR:       deserialized_val = value
+        TYPE_STRING:      deserialized_val = deserialize_string(value)
+        TYPE_STRING_NAME: deserialized_val = deserialize_string(value as String)
+        TYPE_BOOL:        deserialized_val = value
+        TYPE_ARRAY:       deserialized_val = deserialize_array(value)
         TYPE_PACKED_VECTOR2_ARRAY: deserialized_val = value
         TYPE_PACKED_STRING_ARRAY:  deserialized_val = value
-        _:               deserialized_val = str_to_var(value)
+        _:                deserialized_val = str_to_var(value)
         
     return deserialized_val
     

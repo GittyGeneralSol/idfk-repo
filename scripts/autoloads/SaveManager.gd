@@ -137,6 +137,18 @@ func _get_symbol_path(symbol_name: String = "unnamed" + str(rand_from_seed(randi
             
     return symbol_path
     
+func _create_and_get_file_path(file_name: String, subpath: String = "/unspecified_path/") -> String:
+    var dir = PERSISTANT_DIRECTORY + subpath
+    var file_path = dir + file_name + ".json"
+    
+    if not DirAccess.dir_exists_absolute(dir):
+        var error_code = DirAccess.make_dir_recursive_absolute(dir) 
+        if error_code != OK:
+            printerr("Failed to create directory: ", dir, " - FOR: " + file_path + " - Error code: ", error_code)
+            return ""
+            
+    return file_path
+    
 ## -- Formulation of Data --
 
 func _formulate_player_data() -> Dictionary:
@@ -352,6 +364,24 @@ func save_symbol(symbol_data: Dictionary, symbol_name: String) -> bool:
     print("Symbol data saved successfully to: ", symbol_path)
     return true
     
+func save_data_to_file(data_to_save: Dictionary, file_name: String, file_subpath: String) -> bool:
+    var file_path = _create_and_get_file_path(file_name, file_subpath)
+    if file_path.is_empty():
+        return false
+
+    var file = FileAccess.open(file_path, FileAccess.WRITE)
+    if file == null:
+        printerr("Failed to open file for writing: ", file_path, " - ", FileAccess.get_open_error())
+        return false
+        
+    var serialized_data = CustomSerializer.serialize_dictionary(data_to_save)
+    var json_string = JSON.stringify(serialized_data, "\t")
+    file.store_string(json_string)
+    file.close()
+
+    print("Data saved successfully to: ", file_path)
+    return true
+    
 ## -- Appliance of Data --
 
 func apply_world_data(world_data: Dictionary, world: World):
@@ -531,41 +561,23 @@ func load_game(slot_number: int = Vars.save_slot_number) -> Dictionary:
     
 func load_world(world_name: String, slot_number: int = Vars.save_slot_number) -> Dictionary:
     var world_path = _get_world_path(world_name, slot_number)
-    if world_path.is_empty(): # World does not exist. Return empty.
-        return {}
-
-    if not FileAccess.file_exists(world_path):
-        print("No world file found at: ", world_path)
-        return {}
-
-    var file = FileAccess.open(world_path, FileAccess.READ)
-    if file == null:
-        printerr("Failed to open world file for reading: ", world_path, " - ", FileAccess.get_open_error())
-        return {}
-
-    var json_string = file.get_as_text()
-    file.close()
-
-    var json_result = JSON.parse_string(json_string)
-    if json_result == null or not (json_result is Dictionary): 
-        printerr("Failed to parse world file JSON or invalid format: ", world_path)
-        return {}
-
-    print("World loaded successfully from: ", world_path)
-    return json_result as Dictionary
+    return load_file(world_path)
     
 func load_player(slot_number: int = Vars.save_slot_number) -> Dictionary:
     var player_path = _get_player_path(slot_number)
-    if player_path.is_empty(): # Player does not exist. Return empty.
+    return load_file(player_path)
+    
+func load_file(file_path: String) -> Dictionary:
+    if file_path.is_empty():
         return {}
 
-    if not FileAccess.file_exists(player_path):
-        print("No player file found at: ", player_path)
+    if not FileAccess.file_exists(file_path):
+        print("No file found at: ", file_path)
         return {}
 
-    var file = FileAccess.open(player_path, FileAccess.READ)
+    var file = FileAccess.open(file_path, FileAccess.READ)
     if file == null:
-        printerr("Failed to open player file for reading: ", player_path, " - ", FileAccess.get_open_error())
+        printerr("Failed to open file for reading: ", file_path, " - ", FileAccess.get_open_error())
         return {}
 
     var json_string = file.get_as_text()
@@ -573,33 +585,12 @@ func load_player(slot_number: int = Vars.save_slot_number) -> Dictionary:
 
     var json_result = JSON.parse_string(json_string)
     if json_result == null or not (json_result is Dictionary): 
-        printerr("Failed to parse player file JSON or invalid format: ", player_path)
+        printerr("Failed to parse file JSON or invalid format: ", file_path)
         return {}
 
-    print("Player loaded successfully from: ", player_path)
+    print("File loaded successfully from: ", file_path)
     return json_result as Dictionary
     
 func load_symbol(symbol_name: String) -> Dictionary:
     var symbol_path = _get_symbol_path(symbol_name)
-    if symbol_path.is_empty(): # Symbol does not exist. Return empty.
-        return {}
-
-    if not FileAccess.file_exists(symbol_path):
-        print("No symbol file found at: ", symbol_path)
-        return {}
-
-    var file = FileAccess.open(symbol_path, FileAccess.READ)
-    if file == null:
-        printerr("Failed to open symbol file for reading: ", symbol_path, " - ", FileAccess.get_open_error())
-        return {}
-
-    var json_string = file.get_as_text()
-    file.close()
-
-    var json_result = JSON.parse_string(json_string)
-    if json_result == null or not (json_result is Dictionary): 
-        printerr("Failed to parse symbol file JSON or invalid format: ", symbol_path)
-        return {}
-
-    print("Symbol loaded successfully from: ", symbol_path)
-    return json_result as Dictionary
+    return load_file(symbol_path)
